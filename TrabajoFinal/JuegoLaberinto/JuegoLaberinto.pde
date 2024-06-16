@@ -1,18 +1,16 @@
 /* --- ATRIBUTOS --- */
-private Jugador player;
-private JoyPad joypad;
-private Hud hud;
-private Laberinto laberinto;
-private int estado = MaquinaEstados.iniciando;
+private Jugador player;//Clase Jugador
+private JoyPad joypad;//Clase JoyPad
+private Escenario escenario;//Clase escenario
+private int estado = MaquinaEstados.iniciando;//Establece el esatdo INICIAL a INICIANDO
 
 /* --- METODOS --- */
 void setup() {
-  size(600, 600);
-  frameRate(60);
-  player = new Jugador(new PVector(width/2, height/2), new PVector(100, 100));
-  joypad = new JoyPad();
-  hud = new Hud();
-  laberinto = new Laberinto(21, 21);
+  size(600, 600);//Establece el tamaño del lienzo
+  frameRate(60);//Estable el FrameRate a 60 Frames Por Segundo (FPS)
+  player = new Jugador(new PVector(width/2, height/2), new PVector(100, 100));//Inicializacion del JUGADOR
+  joypad = new JoyPad();//Inicializacion del JOYPAD
+  escenario = new Escenario();//Inicializacion del ESCENARIO
 }
 
 void draw() {
@@ -21,20 +19,32 @@ void draw() {
   /* --- Establece la MAQUINA DE ESTADOS ---
    Inciando, Jugando, Ganando y Perdiendo */
   switch(estado) {
-  case MaquinaEstados.iniciando:
+  case MaquinaEstados.iniciando://Pantalla de Inicio
+    //imageMode(CENTER);
+    image(loadImage("intro.png"), 0, 0, 600, 600);
+    textAlign(CENTER);
+    textSize(40);
+    fill(255);
+    text("ka'aguyrusu", width/2, 50);
+    textSize(20);
+    fill(250, 250, 250);
+    text("press 'ENTER'", width/2, height - 201);
+    break;
+  case MaquinaEstados.jugando://Pantalla de Juego
+    escenario.display();//Muestra el escenario
+    player.display();//Muestra al Jugador
+    break;
+  case MaquinaEstados.ganando://Pantalla Ganadora
     textAlign(CENTER);
     textSize(20);
     fill(255);
-    text("The Cave of the Dragon", width/2, height/2);
+    text("¡Has Ganado!", width/2, height/2);
     break;
-  case MaquinaEstados.jugando:
-    laberinto.display();
-    hud.display();
-    player.display();
-    break;
-  case MaquinaEstados.ganando:
-    break;
-  case MaquinaEstados.perdiendo:
+  case MaquinaEstados.perdiendo://Pantalla Perdedora
+    textAlign(CENTER);
+    textSize(20);
+    fill(255);
+    text("¡Has Perdidio!", width/2, height/2);
     break;
   }
 
@@ -86,6 +96,7 @@ void keyPressed() {
 
 //Al Soltar una Tecla
 void keyReleased() {
+  //Establece las teclas a usar para MOVER al personaje
   if (key=='w'||key=='W'||keyCode==UP) {//ARRIBA
     joypad.setUp(false);
   }

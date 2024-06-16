@@ -1,49 +1,54 @@
 class Jugador {
   /* --- ATRIBUTOS --- */
-  private PVector posicion;
-  private PVector velocidad;
-  private int vida;
+  private PVector posicion;//Posicion del Jugador
+  private PVector velocidad;//Velocidad del movimiento del Jugador
+  private int vida;//Vida del jugador
+
 
   /* --- CONSTRUCTOR --- */
   public Jugador(PVector posicion, PVector velocidad) {
     this.posicion = posicion;
     this.velocidad = velocidad;
-    vida = 3;
+    vida = 3;//Vidas iniciales del jugador
   }
 
   /* --- METODOS --- */
+  //Metodo para dibujar al Jugador
   void display() {
     noStroke();
     fill(150, 121, 240);
     rectMode(CENTER);
-    rect(posicion.x, posicion.y, 20, 20);
+    ellipse(posicion.x, posicion.y, 20, 20);
   }
 
+  //Metodo para perder una vida
   void perderVida() {
-    vida--;
-    reespawn();
+    vida--;//Se decrementa un valor a atributo vida
   }
 
-  void reespawn() {
-    posicion = new PVector(width/2, height/2);
-  }
-
+  //Metodo para MOVER al jugador
   void mover(int direccion) {
-    PVector deltaTime = PVector.mult(velocidad, Time.getDeltaTime(frameRate));
+    //Implementacion del DELTATIME
+    PVector movimiento = PVector.mult(velocidad, Time.getDeltaTime(frameRate));
+    PVector nuevaPosicion = posicion.copy();//Copia de la posicion actual
+
+    //Establece el movimiento del Jugador en base a la direccion
     switch(direccion) {
-    case 1://Ariba
-      this.posicion.y -= deltaTime.y;
+    case 1://ARRIBA
+      nuevaPosicion.y -= movimiento.y;
       break;
-    case 2://Abajo
-      this.posicion.y += deltaTime.y;
+    case 2://ABAJO
+      nuevaPosicion.y += movimiento.y;
       break;
-    case 3://izquierda
-      this.posicion.x -= deltaTime.x;
+    case 3://iZQUIERDA
+      nuevaPosicion.x -= movimiento.x;
       break;
-    case 4://Derecha
-      this.posicion.x += deltaTime.x;
+    case 4://DERECHA
+      nuevaPosicion.x += movimiento.x;
       break;
     }
+
+    posicion = nuevaPosicion;
   }
 
   /* --- METODOS ACCESORES --- */

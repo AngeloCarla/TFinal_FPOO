@@ -1,9 +1,10 @@
 class JoyPad {
   /* --- ATRIBUTOS --- */
-  private boolean up;
-  private boolean down;
-  private boolean left;
-  private boolean right;
+  //Establece el ESTADO del Joypad
+  private boolean up;//Arriba
+  private boolean down;//Abajo
+  private boolean left;//Izquierda
+  private boolean right;//Derecha
 
   /* --- METODOS ACCESORES --- */
   void setUp(boolean up) {
