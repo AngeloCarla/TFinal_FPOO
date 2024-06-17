@@ -5,7 +5,7 @@ class Hud {
 
   /* --- CONSTRUCTORES --- */
   public Hud() {
-    tiempoInicial = millis();//Establece el valor actual en milisegundos 
+    tiempoInicial = millis();//Establece el valor actual en milisegundos
   }
 
   /* --- METODOS --- */
@@ -25,6 +25,13 @@ class Hud {
     tiempo = (millis() - tiempoInicial) / 1000; //Calcula el tiempo transcurrido
     if (estado==MaquinaEstados.jugando) {
       text("Tiempo: " + tiempo + "s", 150, 30);
+      if (tiempo > 60) {
+        estado = MaquinaEstados.perdiendo;
+      }
     }
+  }
+  // Método para restablecer el tiempo
+  void reiniciarTiempo() {
+    tiempoInicial = millis();
   }
 }

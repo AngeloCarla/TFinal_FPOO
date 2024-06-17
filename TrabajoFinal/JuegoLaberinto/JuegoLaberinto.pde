@@ -69,11 +69,23 @@ void draw() {
   }
 }
 
+//Metodo para reiniciar el juego
+void reiniciarJuego() {
+  player = new Jugador(new PVector(width / 2, height / 2), new PVector(100, 100));
+  joypad = new JoyPad();
+  escenario = new Escenario();
+  estado = MaquinaEstados.iniciando;
+}
+
 //Al Presionar una Tecla
 void keyPressed() {
   //Establece las teclas para cambiar el ESTADO de juego
-  if (keyCode==ENTER) {
-    estado = MaquinaEstados.jugando;
+ if (keyCode == ENTER) {
+    if (estado == MaquinaEstados.iniciando) {
+      estado = MaquinaEstados.jugando;
+    } else if (estado == MaquinaEstados.perdiendo || estado == MaquinaEstados.ganando) {
+      reiniciarJuego(); // Reinicia el juego si está en los estados de ganando o perdiendo
+    }
   }
 
   //Establece las teclas a usar para MOVER al personaje

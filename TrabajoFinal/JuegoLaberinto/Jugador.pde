@@ -51,6 +51,12 @@ class Jugador {
     posicion = nuevaPosicion;
   }
 
+  void morir() {
+    if (vida>=0) {
+      estado = MaquinaEstados.perdiendo;
+    }
+  }
+
   /* --- METODOS ACCESORES --- */
   public int getVidas() {
     return vida;
