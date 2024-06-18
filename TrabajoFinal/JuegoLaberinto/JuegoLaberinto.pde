@@ -21,14 +21,13 @@ void draw() {
   switch(estado) {
   case MaquinaEstados.iniciando://Pantalla de Inicio
     //imageMode(CENTER);
-    image(loadImage("intro.png"), 0, 0, 600, 600);
-    textAlign(CENTER);
+    image(loadImage("intro.png"), 0, 0, 600, 600);//Imagen de Fondo de la Pantalla de Inicio
+    image(loadImage("titulo.png"), 0, - 210, 600, 600);// Imagen del Titulo de la Pantalla de Inicio
+ /*   textAlign(CENTER);
     textSize(40);
     fill(255);
-    text("ka'aguyrusu", width/2, 50);
-    textSize(20);
     fill(250, 250, 250);
-    text("press 'ENTER'", width/2, height - 201);
+    text("press 'ENTER'", width/2, height - 201);*/
     break;
   case MaquinaEstados.jugando://Pantalla de Juego
     escenario.display();//Muestra el escenario
@@ -80,7 +79,7 @@ void reiniciarJuego() {
 //Al Presionar una Tecla
 void keyPressed() {
   //Establece las teclas para cambiar el ESTADO de juego
- if (keyCode == ENTER) {
+  if (keyCode == ENTER) {
     if (estado == MaquinaEstados.iniciando) {
       estado = MaquinaEstados.jugando;
     } else if (estado == MaquinaEstados.perdiendo || estado == MaquinaEstados.ganando) {

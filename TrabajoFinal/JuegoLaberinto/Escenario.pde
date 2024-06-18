@@ -8,7 +8,7 @@ class Escenario {
     hud = new Hud();//Inicializacion de Hud
     laberinto = new Laberinto(25, 25, 25);//Inicializacion de Laberinto
     hud.reiniciarTiempo();
-    player.morir();
+   // player.morir();
   }
 
   /* --- METODOS --- */
