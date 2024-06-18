@@ -61,7 +61,8 @@ class Laberinto {
       for (int j = 0; j < columnas; j++) {
         if (laberinto[i][j] == 1) {
           fill(255);
-          rect(j * tamanoCelda, i * tamanoCelda, tamanoCelda, tamanoCelda);
+          int t= 12;
+          rect(j * tamanoCelda+t, i * tamanoCelda, tamanoCelda, tamanoCelda);
         }
       }
     }

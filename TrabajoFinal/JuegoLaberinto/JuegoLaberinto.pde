@@ -1,7 +1,8 @@
 /* --- ATRIBUTOS --- */
 private Jugador player;//Clase Jugador
 private JoyPad joypad;//Clase JoyPad
-private Escenario escenario;//Clase escenario
+private Laberinto laberinto;//Clase Laberinto
+private Hud hud;//Clase HUD
 private int estado = MaquinaEstados.iniciando;//Establece el esatdo INICIAL a INICIANDO
 
 /* --- METODOS --- */
@@ -10,11 +11,15 @@ void setup() {
   frameRate(60);//Estable el FrameRate a 60 Frames Por Segundo (FPS)
   player = new Jugador(new PVector(width/2, height/2), new PVector(100, 100));//Inicializacion del JUGADOR
   joypad = new JoyPad();//Inicializacion del JOYPAD
-  escenario = new Escenario();//Inicializacion del ESCENARIO
+  laberinto = new Laberinto(20,20,32);//Inicializacion del Laberinto
+  hud = new Hud(); //Inicializacion del HUD
 }
 
 void draw() {
   background(50);
+  
+  hud.display();
+  laberinto.display();
 
   /* --- Establece la MAQUINA DE ESTADOS ---
    Inciando, Jugando, Ganando y Perdiendo */
@@ -31,7 +36,6 @@ void draw() {
     text("press 'ENTER'", width/2, height - 201);
     break;
   case MaquinaEstados.jugando://Pantalla de Juego
-    escenario.display();//Muestra el escenario
     player.display();//Muestra al Jugador
     break;
   case MaquinaEstados.ganando://Pantalla Ganadora
@@ -73,7 +77,6 @@ void draw() {
 void reiniciarJuego() {
   player = new Jugador(new PVector(width / 2, height / 2), new PVector(100, 100));
   joypad = new JoyPad();
-  escenario = new Escenario();
   estado = MaquinaEstados.iniciando;
 }
 

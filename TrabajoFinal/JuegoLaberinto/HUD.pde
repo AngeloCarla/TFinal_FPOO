@@ -10,7 +10,7 @@ class Hud {
 
   /* --- METODOS --- */
   //Metodo para mostrar la Vida del JUGADOR
-  void mostrarVida() {
+  void mostrarVida(Jugador player) {
     textAlign(CENTER);
     textSize(20);
     fill(255);
@@ -33,5 +33,10 @@ class Hud {
   // Método para restablecer el tiempo
   void reiniciarTiempo() {
     tiempoInicial = millis();
+  }
+  
+  void display(){
+    hud.mostrarVida(player);
+    hud.mostrarTiempo();
   }
 }
