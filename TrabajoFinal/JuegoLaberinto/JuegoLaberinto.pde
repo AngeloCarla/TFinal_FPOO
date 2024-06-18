@@ -1,7 +1,8 @@
 /* --- ATRIBUTOS --- */
 private Jugador player;//Clase Jugador
 private JoyPad joypad;//Clase JoyPad
-private Escenario escenario;//Clase escenario
+private Laberinto laberinto;//Clase Laberinto
+private Hud hud;//Clase Hud
 private int estado = MaquinaEstados.iniciando;//Establece el esatdo INICIAL a INICIANDO
 
 /* --- METODOS --- */
@@ -10,40 +11,36 @@ void setup() {
   frameRate(60);//Estable el FrameRate a 60 Frames Por Segundo (FPS)
   player = new Jugador(new PVector(width/2, height/2), new PVector(100, 100));//Inicializacion del JUGADOR
   joypad = new JoyPad();//Inicializacion del JOYPAD
-  escenario = new Escenario();//Inicializacion del ESCENARIO
+  laberinto = new Laberinto(20, 20, 32);//Inicializacion del LABERINTO
+  hud = new Hud();//Inicializacion del HUD
 }
 
 void draw() {
   background(50);
-
   /* --- Establece la MAQUINA DE ESTADOS ---
    Inciando, Jugando, Ganando y Perdiendo */
   switch(estado) {
   case MaquinaEstados.iniciando://Pantalla de Inicio
     //imageMode(CENTER);
     image(loadImage("intro.png"), 0, 0, 600, 600);//Imagen de Fondo de la Pantalla de Inicio
-    image(loadImage("titulo.png"), 0, - 210, 600, 600);// Imagen del Titulo de la Pantalla de Inicio
- /*   textAlign(CENTER);
-    textSize(40);
-    fill(255);
-    fill(250, 250, 250);
-    text("press 'ENTER'", width/2, height - 201);*/
+    image(loadImage("titulo.png"), 0, - 210, 600, 600);//Imagen del Titulo de la Pantalla de Inicio
     break;
   case MaquinaEstados.jugando://Pantalla de Juego
-    escenario.display();//Muestra el escenario
+    laberinto.display();//Muestra el escenario
+    hud.display();//Muestra el Hud
     player.display();//Muestra al Jugador
     break;
   case MaquinaEstados.ganando://Pantalla Ganadora
     textAlign(CENTER);
     textSize(20);
     fill(255);
-    text("¡Has Ganado!", width/2, height/2);
+    text("¡Has Ganado!", width/2, height/2);//Muestra un mensaje ¡Has Ganado! al pasar al estado GANANDO
     break;
   case MaquinaEstados.perdiendo://Pantalla Perdedora
     textAlign(CENTER);
     textSize(20);
     fill(255);
-    text("¡Has Perdidio!", width/2, height/2);
+    text("¡Has Perdido!", width/2, height/2);//Muestra un mensaje ¡Has Perdido! al pasar al estado PERDIENDO
     break;
   }
 
@@ -70,20 +67,21 @@ void draw() {
 
 //Metodo para reiniciar el juego
 void reiniciarJuego() {
+  //Se RESTABLECEN todas las Clases
   player = new Jugador(new PVector(width / 2, height / 2), new PVector(100, 100));
   joypad = new JoyPad();
-  escenario = new Escenario();
+  hud = new Hud();
+  laberinto = new Laberinto(20, 20, 32);
   estado = MaquinaEstados.iniciando;
 }
 
-//Al Presionar una Tecla
 void keyPressed() {
   //Establece las teclas para cambiar el ESTADO de juego
   if (keyCode == ENTER) {
     if (estado == MaquinaEstados.iniciando) {
       estado = MaquinaEstados.jugando;
     } else if (estado == MaquinaEstados.perdiendo || estado == MaquinaEstados.ganando) {
-      reiniciarJuego(); // Reinicia el juego si está en los estados de ganando o perdiendo
+      reiniciarJuego(); //Reinicia el juego si está en los estados de GANANDO o PERDIENDO
     }
   }
 
@@ -105,7 +103,6 @@ void keyPressed() {
   }
 }
 
-//Al Soltar una Tecla
 void keyReleased() {
   //Establece las teclas a usar para MOVER al personaje
   if (key=='w'||key=='W'||keyCode==UP) {//ARRIBA

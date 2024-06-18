@@ -9,6 +9,11 @@ class Hud {
   }
 
   /* --- METODOS --- */
+  //Metodo la VISUALIZAR el Hud
+  void display() {
+    hud.mostrarVida();
+    hud.mostrarTiempo();
+  }
   //Metodo para mostrar la Vida del JUGADOR
   void mostrarVida() {
     textAlign(CENTER);
@@ -24,13 +29,11 @@ class Hud {
     fill(255);
     tiempo = (millis() - tiempoInicial) / 1000; //Calcula el tiempo transcurrido
     if (estado==MaquinaEstados.jugando) {
-      text("Tiempo: " + tiempo + "s", 150, 30);
-      if (tiempo > 60) {
-        estado = MaquinaEstados.perdiendo;
-      }
+      text("Tiempo: " + tiempo + "s", 150, 30);//Muestra el tiempo en pantalla miestras el juego este en el esatdo JUGANDO
     }
   }
-  // Método para restablecer el tiempo
+
+  // Método para RESTABLECER el tiempo
   void reiniciarTiempo() {
     tiempoInicial = millis();
   }

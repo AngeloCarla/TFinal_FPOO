@@ -21,11 +21,6 @@ class Jugador {
     ellipse(posicion.x, posicion.y, 20, 20);
   }
 
-  //Metodo para perder una vida
-  void perderVida() {
-    vida--;//Se decrementa un valor a atributo vida
-  }
-
   //Metodo para MOVER al jugador
   void mover(int direccion) {
     //Implementacion del DELTATIME
@@ -49,6 +44,12 @@ class Jugador {
     }
 
     posicion = nuevaPosicion;
+  }
+
+
+  //Metodo para perder una vida
+  void perderVida() {
+    vida--;//Se decrementa un valor a atributo vida
   }
 
   void morir() {
