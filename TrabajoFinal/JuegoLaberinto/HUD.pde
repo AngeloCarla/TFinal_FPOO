@@ -1,4 +1,4 @@
-class Hud {
+class Hud implements IVisualizable {
   /* --- ATRIBUTOS --- */
   private int tiempoInicial;//Establece el tiempo inicial del juego
   private int tiempo;//Establece el tiempo del juego
@@ -9,7 +9,7 @@ class Hud {
   }
 
   /* --- METODOS --- */
-  //Metodo la VISUALIZAR el Hud
+  //Metodo la visualizar el Hud
   void display() {
     hud.mostrarVida();
     hud.mostrarTiempo();
@@ -33,7 +33,7 @@ class Hud {
     }
   }
 
-  // Método para RESTABLECER el tiempo
+  // Método para restablecer el tiempo
   void reiniciarTiempo() {
     tiempoInicial = millis();
   }

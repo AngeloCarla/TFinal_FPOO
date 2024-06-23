@@ -11,12 +11,13 @@ void setup() {
   frameRate(60);//Estable el FrameRate a 60 Frames Por Segundo (FPS)
   player = new Jugador(new PVector(width/2, height/2), new PVector(100, 100));//Inicializacion del JUGADOR
   joypad = new JoyPad();//Inicializacion del JOYPAD
-  laberinto = new Laberinto(20, 20, 32);//Inicializacion del LABERINTO
+  laberinto = new Laberinto();//Inicializacion del LABERINTO
   hud = new Hud();//Inicializacion del HUD
 }
 
 void draw() {
   background(50);
+  frameRate(30);
   /* --- Establece la MAQUINA DE ESTADOS ---
    Inciando, Jugando, Ganando y Perdiendo */
   switch(estado) {
@@ -29,6 +30,37 @@ void draw() {
     laberinto.display();//Muestra el escenario
     hud.display();//Muestra el Hud
     player.display();//Muestra al Jugador
+
+    /* --- Establece el JOYPAD ---
+     Arriba, Abajo, Izquierda y Derecha */
+    boolean move = false;
+    
+    if (estado == MaquinaEstados.jugando) {
+      if (joypad.isUp()) {
+        player.mover(MaquinaEstadosJugador.moveUp);
+        move = true;
+      }
+
+      if (joypad.isDown()) {
+        player.mover(MaquinaEstadosJugador.moveDown);
+        move = true;
+      }
+
+      if (joypad.isLeft()) {
+        player.mover(MaquinaEstadosJugador.moveLeft);
+        move = true;
+      }
+
+      if (joypad.isRight()) {
+        player.mover(MaquinaEstadosJugador.moveRight);
+        move = true;
+      }
+
+      if (!move) {
+        player.detener();//Detiene al personaje si no hay teclas presionadas
+      }
+    }
+
     break;
   case MaquinaEstados.ganando://Pantalla Ganadora
     textAlign(CENTER);
@@ -43,26 +75,6 @@ void draw() {
     text("¡Has Perdido!", width/2, height/2);//Muestra un mensaje ¡Has Perdido! al pasar al estado PERDIENDO
     break;
   }
-
-  /* --- Establece el JOYPAD ---
-   Arriba, Abajo, Izquierda y Derecha */
-  if (estado == MaquinaEstados.jugando) {
-    if (joypad.isUp()) {
-      player.mover(1);
-    }
-
-    if (joypad.isDown()) {
-      player.mover(2);
-    }
-
-    if (joypad.isLeft()) {
-      player.mover(3);
-    }
-
-    if (joypad.isRight()) {
-      player.mover(4);
-    }
-  }
 }
 
 //Metodo para reiniciar el juego
@@ -71,7 +83,7 @@ void reiniciarJuego() {
   player = new Jugador(new PVector(width / 2, height / 2), new PVector(100, 100));
   joypad = new JoyPad();
   hud = new Hud();
-  laberinto = new Laberinto(20, 20, 32);
+  laberinto = new Laberinto();
   estado = MaquinaEstados.iniciando;
 }
 

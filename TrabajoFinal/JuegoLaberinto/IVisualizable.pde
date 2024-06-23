@@ -1,0 +1,4 @@
+interface IVisualizable {
+  /**/
+  void display();
+}
