@@ -1,4 +1,4 @@
-class Collider {
+class Collider implements IPosicionable {
   /* --- ATRIBUTOS --- */
   private int ancho;
   private int alto;

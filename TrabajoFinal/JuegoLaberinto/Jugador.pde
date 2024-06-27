@@ -1,31 +1,33 @@
-class Jugador implements IVisualizable {
+class Jugador implements IVisualizable, IPosicionable {
   /* --- ATRIBUTOS --- */
   private PVector posicion;//Posicion del Jugador
   private PVector velocidad;//Velocidad del movimiento del Jugador
   private int vida;//Vida del jugador
-  private Sprites sprite;
-  private int statePlayer;
+  private Sprites sprite;//Inicializacion de Sprites
+  private int statePlayer;//Estado del Jugador IDLE en sus 4 direcciones, ARRIBA, ABAJO, IZQUIERDA, DERECHA 
+  private Collider collideJugador;
 
   /* --- CONSTRUCTOR --- */
-  public Jugador(PVector posicion, PVector velocidad) {
+  public Jugador(PVector posicion, PVector velocidad, int ancho, int alto) {
     this.posicion = posicion;
     this.velocidad = velocidad;
+    this.collideJugador = new Collider(ancho, alto, posicion);//Inicializacion del collider segun el ancho, alto y posicion del Jugador
     vida = 3;//Vidas iniciales del jugador
-    sprite = new Sprites();
-    statePlayer = MaquinaEstadosJugador.moveUp;
+    sprite = new Sprites();//Inicializacion del Sprites
+    statePlayer = MaquinaEstadosJugador.moveUp;//Estado inicial del Jugador en direccion hacia ARRIBA
   }
 
   /* --- METODOS --- */
-  //Metodo para dibujar al Jugador
+  //Metodo para visualizar al Jugador
   void display() {
-    sprite.renderJugador(this.statePlayer, this.posicion);
-    luz.mostrar(this.posicion);
+    sprite.renderJugador(this.statePlayer, this.posicion);//Llama al metodo renderJugador
+    luz.mostrar(this.posicion);//Llama al metodo mostrar de Iliminador
   }
 
   //Metodo para mover al jugador
   void mover(int direccion) {
 
-    PVector deltaTime = PVector.mult(velocidad, Time.getDeltaTime(frameRate));
+    PVector deltaTime = PVector.mult(velocidad, Time.getDeltaTime(frameRate));//Implementacion del DeltaTime
     switch(direccion) {
 
     case MaquinaEstadosJugador.moveUp://ARRIBA
@@ -76,8 +78,21 @@ class Jugador implements IVisualizable {
       estado = MaquinaEstados.perdiendo;
     }
   }
+  
+  //Metodo para detectar la colision con un ObjetoMagico
+  boolean colision(ObjetoMagico obMg) {
+    return collideJugador.colision(obMg.getCollideObMg());//Verifica la colision entre el collider del Jugador con el del ObjetoMagico
+  }
 
   /* --- METODOS ACCESORES --- */
+  public Collider getCollideJugador() {
+    return collideJugador;
+  }
+
+  public void setCollider(Collider collideJugador) {
+    this.collideJugador = collideJugador;
+  }
+
   public int getVidas() {
     return vida;
   }
