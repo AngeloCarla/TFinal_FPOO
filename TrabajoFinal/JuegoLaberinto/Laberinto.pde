@@ -12,7 +12,7 @@ class Laberinto implements IVisualizable {
   // Método para mostrar el laberinto
   void display() {
     //fill(94, 160, 84);
-    noStroke();
+ /*   noStroke();
     //Rect x lb, y lb, ancho, largo
     fill(94, 160, 84);//vertical
     rect(xMaze, yMaze, line, 540);//1
@@ -27,7 +27,7 @@ class Laberinto implements IVisualizable {
     rect(xMaze + bs*2, yMaze + bs, bs*3, line);
     rect(xMaze + bs, yMaze + bs*2, bs*2, line);
     rect(xMaze, yMaze + bs*4, bs*4, line);
-  }
+  }*/
 
   /* --- METODOS ACCESORES --- */
 }

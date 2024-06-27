@@ -3,6 +3,7 @@ private Jugador player;//Clase Jugador
 private JoyPad joypad;//Clase JoyPad
 private Laberinto laberinto;//Clase Laberinto
 private Hud hud;//Clase Hud
+private Luz luz;
 private int estado = MaquinaEstados.iniciando;//Establece el esatdo INICIAL a INICIANDO
 
 /* --- METODOS --- */
@@ -13,11 +14,13 @@ void setup() {
   joypad = new JoyPad();//Inicializacion del JOYPAD
   laberinto = new Laberinto();//Inicializacion del LABERINTO
   hud = new Hud();//Inicializacion del HUD
+  luz = new Luz(5000);
 }
 
 void draw() {
   background(50);
   frameRate(30);
+  luz.actualizar();
   /* --- Establece la MAQUINA DE ESTADOS ---
    Inciando, Jugando, Ganando y Perdiendo */
   switch(estado) {
@@ -34,7 +37,7 @@ void draw() {
     /* --- Establece el JOYPAD ---
      Arriba, Abajo, Izquierda y Derecha */
     boolean move = false;
-    
+
     if (estado == MaquinaEstados.jugando) {
       if (joypad.isUp()) {
         player.mover(MaquinaEstadosJugador.moveUp);
@@ -84,6 +87,7 @@ void reiniciarJuego() {
   joypad = new JoyPad();
   hud = new Hud();
   laberinto = new Laberinto();
+  luz = new Luz(5000);
   estado = MaquinaEstados.iniciando;
 }
 
@@ -95,6 +99,10 @@ void keyPressed() {
     } else if (estado == MaquinaEstados.perdiendo || estado == MaquinaEstados.ganando) {
       reiniciarJuego(); //Reinicia el juego si está en los estados de GANANDO o PERDIENDO
     }
+  }
+
+  if (key=='e') {
+    luz.activar();
   }
 
   //Establece las teclas a usar para MOVER al personaje
