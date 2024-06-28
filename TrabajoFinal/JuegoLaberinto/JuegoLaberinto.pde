@@ -7,11 +7,11 @@ private int estado = MaquinaEstados.iniciando;//Establece el esatdo INICIAL a IN
 
 /* --- METODOS --- */
 void setup() {
-  size(600, 600);//Establece el tamaño del lienzo
+  size(570, 600);//Establece el tamaño del lienzo
   frameRate(60);//Estable el FrameRate a 60 Frames Por Segundo (FPS)
-  player = new Jugador(new PVector(width/2, height/2), new PVector(100, 100));//Inicializacion del JUGADOR
+  player = new Jugador(new PVector(width/2, height/2+15), new PVector(100, 100));//Inicializacion del JUGADOR
   joypad = new JoyPad();//Inicializacion del JOYPAD
-  laberinto = new Laberinto(20,20,32);//Inicializacion del Laberinto
+  laberinto = new Laberinto(20,20,30);//Inicializacion del Laberinto
   hud = new Hud(); //Inicializacion del HUD
 }
 

@@ -14,7 +14,7 @@ class Hud {
     textAlign(CENTER);
     textSize(20);
     fill(255);
-    text("Vidas: " + player.vida, 50, 30);
+    text("Vidas: " + player.vida, 50, 25);
   }
 
   //Metodo para mostrar el Tiempo en el juego
@@ -24,7 +24,7 @@ class Hud {
     fill(255);
     tiempo = (millis() - tiempoInicial) / 1000; //Calcula el tiempo transcurrido
     if (estado==MaquinaEstados.jugando) {
-      text("Tiempo: " + tiempo + "s", 150, 30);
+      text("Tiempo: " + tiempo + "s", 150, 25);
       if (tiempo > 60) {
         estado = MaquinaEstados.perdiendo;
       }

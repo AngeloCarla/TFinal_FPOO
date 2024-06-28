@@ -1,15 +1,17 @@
 class Laberinto {
   /* --- ATRIBUTOS --- */
   private int filas, columnas;//Dimensiones del laberinto
-  private int[][] laberinto;//Matriz para almacenar el laberinto
+  private int[][] celdas;//Matriz para almacenar el laberinto
   private int tamanoCelda;//Tamaño de las celdas del laberinto
+  private PImage laberinto;
 
   /* --- CONSTRUCTORES --- */
   public Laberinto(int filas, int columnas, int tamanoCelda) {
     this.filas = filas;
     this.columnas = columnas;
     this.tamanoCelda = tamanoCelda;
-    laberinto = new int[filas][columnas];
+    this.laberinto = loadImage("laberinto.png");
+    this.celdas = new int[filas][columnas];
     generarLaberinto();
   }
 
@@ -18,12 +20,12 @@ class Laberinto {
   private void generarLaberinto() {
     for (int i = 0; i < filas; i++) {
       for (int j = 0; j < columnas; j++) {
-        laberinto[i][j] = 1; // Pared
+        celdas[i][j] = 1; // Pared
       }
     }
     int x = 1;
     int y = 1;
-    laberinto[x][y] = 0; //Espacio libre
+    celdas[x][y] = 0; //Espacio libre
     generarCamino(x, y);
   }
 
@@ -37,9 +39,9 @@ class Laberinto {
     for (int i = 0; i < 4; i++) {
       int nx = x + dx[orden[i]] * 2;
       int ny = y + dy[orden[i]] * 2;
-      if (nx > 0 && ny > 0 && nx < filas - 1 && ny < columnas - 1 && laberinto[nx][ny] == 1) {
-        laberinto[nx - dx[orden[i]]][ny - dy[orden[i]]] = 0;
-        laberinto[nx][ny] = 0;
+      if (nx > 0 && ny > 0 && nx < filas - 1 && ny < columnas - 1 && celdas[nx][ny] == 1) {
+        celdas[nx - dx[orden[i]]][ny - dy[orden[i]]] = 0;
+        celdas[nx][ny] = 0;
         generarCamino(nx, ny);
       }
     }
@@ -59,10 +61,8 @@ class Laberinto {
   void display() {
     for (int i = 0; i < filas; i++) {
       for (int j = 0; j < columnas; j++) {
-        if (laberinto[i][j] == 1) {
-          fill(255);
-          int t= 12;
-          rect(j * tamanoCelda+t, i * tamanoCelda, tamanoCelda, tamanoCelda);
+        if (celdas[i][j] == 1) {
+          image(laberinto, j * tamanoCelda, i * tamanoCelda+30, tamanoCelda, tamanoCelda);
         }
       }
     }
