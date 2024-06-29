@@ -1,4 +1,5 @@
 class Iluminador {
+  /* Clase que se encarga del Iluminador, objeto que ilumina al jugador al presionar la tecla 'e' */
   /* --- ATRIBUTOS --- */
   private boolean encendida;//Indica si el Iluminador esta encendida o apagada
   private int duracion;//Duracion en la que permanece encendido (en milisegundos)
@@ -32,10 +33,10 @@ class Iluminador {
 
   //Metodo para mostrar el poder en base a la posicion del Jugador
   public void mostrar(PVector posicion) {
-    if (encendida) {
+    if (encendida) {//Si el Iluminador esta encendidio se dibuja un ellipse alrededor del Jugador y del ObjetoMagico simulando una Luz
       noStroke();
       ellipseMode(CENTER);
-      fill(250, 240, 149, 50);//R, G, B, transparecia
+      fill(250, 240, 149, 50);//R, G, B, value transparecia
       ellipse(posicion.x, posicion.y, 50, 50);
     }
   }

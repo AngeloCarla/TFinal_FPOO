@@ -20,7 +20,7 @@ void setup() {
 }
 
 void draw() {
-  background(50);
+  background(50);//Fondo
   frameRate(30);
   luz.actualizar();
   /* --- Establece la MAQUINA DE ESTADOS ---

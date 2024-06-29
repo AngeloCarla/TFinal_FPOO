@@ -25,6 +25,7 @@ class Sprites {
   //Metodo que se encarga de renderizar al personaje dependiendo del estado en el que se encuentra
   public void renderJugador(int state, PVector posicion) {
     imageMode(CENTER);
+    //Implementacion del DeltaTime
     int framesPorSegundo = round(frameRate);
     float deltaTime = Time.getDeltaTime(framesPorSegundo);
 
@@ -67,20 +68,20 @@ class Sprites {
       break;
     }
 
-    //Definicion de la Imagen
+    // Renderiza la imagen del jugador con el frame ajustado según el estado
     image(spriteJugador.get(this.xFrame, yFrame, widthFrame, heightFrame), posicion.x, posicion.y, 30, 30);
 
-    //En caso de no estar el personaje quieto
+    // Si el jugador no está en estado idle, avanza la animación
     if (state != MaquinaEstadosJugador.idleDown && state != MaquinaEstadosJugador.idleLeft &&
       state != MaquinaEstadosJugador.idleRight && state != MaquinaEstadosJugador.idleUp) {
-      xFrameFloat += (widthFrame*velTransicion*deltaTime);//
-      if (xFrameFloat>=nextxFrameFloat) {
-        this.xFrame+=this.widthFrame;//
-        nextxFrameFloat=xFrame+this.widthFrame;//
-        if (this.xFrame>=this.spriteJugador.width) {
-          this.xFrame=0;//
-          this.xFrameFloat=0;//
-          this.nextxFrameFloat=this.widthFrame;//
+      xFrameFloat += (widthFrame * velTransicion * deltaTime);  // Actualiza la posición flotante del frame
+      if (xFrameFloat >= nextxFrameFloat) {
+        this.xFrame += this.widthFrame;  // Avanza al siguiente frame
+        nextxFrameFloat = xFrame + this.widthFrame;  // Actualiza la próxima posición flotante del frame
+        if (this.xFrame >= this.spriteJugador.width) {
+          this.xFrame = 0;  // Reinicia al inicio si alcanza el final de la imagen
+          this.xFrameFloat = 0;  // Reinicia la posición flotante del frame
+          this.nextxFrameFloat = this.widthFrame;  // Reinicia la próxima posición flotante del frame
         }
       }
     }

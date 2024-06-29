@@ -1,4 +1,5 @@
 class Collider implements IPosicionable {
+  /* Clase que se encarga de las colisiones en el Juego */
   /* --- ATRIBUTOS --- */
   private int ancho;
   private int alto;

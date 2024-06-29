@@ -1,4 +1,5 @@
 class Hud implements IVisualizable {
+  /* Clase que se encarga de visualizar el Hud en pantalla, Tiempo de Juego */
   /* --- ATRIBUTOS --- */
   private int tiempoInicial;//Establece el tiempo inicial del juego
   private int tiempo;//Establece el tiempo del juego
@@ -11,15 +12,7 @@ class Hud implements IVisualizable {
   /* --- METODOS --- */
   //Metodo la visualizar el Hud
   void display() {
-    hud.mostrarVida();
     hud.mostrarTiempo();
-  }
-  //Metodo para mostrar la Vida del JUGADOR
-  void mostrarVida() {
-    textAlign(CENTER);
-    textSize(20);
-    fill(255);
-    text("Vidas: " + player.vida, 50, 30);
   }
 
   //Metodo para mostrar el Tiempo en el juego

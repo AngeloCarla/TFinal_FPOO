@@ -1,6 +1,6 @@
 class MaquinaEstadosJugador {
   /*Representa los ESTADOS en el que puede estar el Personaje*/
-  public static final int moveUp = 0;//Se mueve Arriba 
+  public static final int moveUp = 0;//Se mueve Arriba
   public static final int moveDown = 1;//Se mueve Abajo
   public static final int moveRight = 2;//Se mueve a la Derecha
   public static final int moveLeft = 3;//Se mueve a la Izquierda

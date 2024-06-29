@@ -15,6 +15,7 @@ class ObjetoMagico implements IVisualizable, IPosicionable {
     noStroke();
     fill(90, 193, 106);
     ellipse(posicion.x, posicion.y, 30, 30);
+    luz.mostrar(this.posicion);//Se ilumina al activar el Iluminador
   }
 
   //Metodo para detectar una colison con Jugador

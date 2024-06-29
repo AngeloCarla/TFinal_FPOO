@@ -2,9 +2,8 @@ class Jugador implements IVisualizable, IPosicionable {
   /* --- ATRIBUTOS --- */
   private PVector posicion;//Posicion del Jugador
   private PVector velocidad;//Velocidad del movimiento del Jugador
-  private int vida;//Vida del jugador
   private Sprites sprite;//Inicializacion de Sprites
-  private int statePlayer;//Estado del Jugador IDLE en sus 4 direcciones, ARRIBA, ABAJO, IZQUIERDA, DERECHA 
+  private int statePlayer;//Estado del Jugador IDLE en sus 4 direcciones, ARRIBA, ABAJO, IZQUIERDA, DERECHA
   private Collider collideJugador;
 
   /* --- CONSTRUCTOR --- */
@@ -12,7 +11,6 @@ class Jugador implements IVisualizable, IPosicionable {
     this.posicion = posicion;
     this.velocidad = velocidad;
     this.collideJugador = new Collider(ancho, alto, posicion);//Inicializacion del collider segun el ancho, alto y posicion del Jugador
-    vida = 3;//Vidas iniciales del jugador
     sprite = new Sprites();//Inicializacion del Sprites
     statePlayer = MaquinaEstadosJugador.moveUp;//Estado inicial del Jugador en direccion hacia ARRIBA
   }
@@ -67,18 +65,6 @@ class Jugador implements IVisualizable, IPosicionable {
     }
   }
 
-  //Metodo para perder una vida
-  void perderVida() {
-    vida--;//Se decrementa un valor a atributo vida
-  }
-
-  //Metodo para morir
-  void morir() {
-    if (vida>=0) {
-      estado = MaquinaEstados.perdiendo;
-    }
-  }
-  
   //Metodo para detectar la colision con un ObjetoMagico
   boolean colision(ObjetoMagico obMg) {
     return collideJugador.colision(obMg.getCollideObMg());//Verifica la colision entre el collider del Jugador con el del ObjetoMagico
@@ -91,10 +77,6 @@ class Jugador implements IVisualizable, IPosicionable {
 
   public void setCollider(Collider collideJugador) {
     this.collideJugador = collideJugador;
-  }
-
-  public int getVidas() {
-    return vida;
   }
 
   public void setStatePlayer(int statePlayer) {
