@@ -1,6 +1,7 @@
 /* --- ATRIBUTOS --- */
 private Jugador player;//Clase Jugador
 private JoyPad joypad;//Clase JoyPad
+private Escenario escenario;//Clase Escenario
 private Laberinto laberinto;//Clase Laberinto
 private Hud hud;//Clase Hud
 private Iluminador luz;// Clase Iluminador
@@ -11,12 +12,13 @@ private int estado = MaquinaEstados.iniciando;//Establece el esatdo INICIAL a IN
 void setup() {
   size(600, 600);//Establece el tamaño del lienzo
   frameRate(60);//Estable el FrameRate a 60 Frames Por Segundo (FPS)
-  player = new Jugador(new PVector(width/2, height/2), new PVector(100, 100), 30, 30);//Inicializacion del JUGADOR
+  player = new Jugador(new PVector(92, 145), new PVector(100, 100), 30, 30);//Inicializacion del JUGADOR
   joypad = new JoyPad();//Inicializacion del JOYPAD
+  escenario = new Escenario();//Inicializacion de Escenario
   laberinto = new Laberinto();//Inicializacion del LABERINTO
   hud = new Hud();//Inicializacion del HUD
   luz = new Iluminador(4000);//Inicializa la clase Iluminador con 4000 de duracion equivalente a 4s
-  trofeo = new ObjetoMagico(new PVector(random(100, 100), random(100, 50)), 30, 30);//Inicializacion del ObjetoMagico alias Trofeo
+  trofeo = new ObjetoMagico(new PVector(65, 470), 30, 30);//Inicializacion del ObjetoMagico alias Trofeo
 }
 
 void draw() {
@@ -27,15 +29,14 @@ void draw() {
    Inciando, Jugando, Ganando y Perdiendo */
   switch(estado) {
   case MaquinaEstados.iniciando://Pantalla de Inicio
-    //imageMode(CENTER);
-    image(loadImage("intro.png"), 0, 0, 600, 600);//Imagen de Fondo de la Pantalla de Inicio
+    image(loadImage("inicio.jpg"), 0, 0, 600, 600);//Imagen de Fondo de la Pantalla de Inicio
     image(loadImage("titulo.png"), 0, - 210, 600, 600);//Imagen del Titulo de la Pantalla de Inicio
     break;
   case MaquinaEstados.jugando://Pantalla de Juego
     laberinto.display();//Muestra el escenario
     hud.display();//Muestra el Hud
-    trofeo.display();
-    player.display();//Muestra al Jugador
+    trofeo.display();//Muestra al Trofeo
+    escenario.display();
 
     /* --- Establece el JOYPAD ---
      Arriba, Abajo, Izquierda y Derecha */
@@ -67,10 +68,14 @@ void draw() {
       }
     }
 
-    //Verificacion de Colision entre Jugador y ObjetoMagico
     if (player.colision(trofeo)) {
-      // Acciones al colisionar
-      estado = MaquinaEstados.ganando;//Si colisiona pasa a la pantalla de Victoria
+      estado = MaquinaEstados.ganando;
+    }
+
+
+    if (player.colision(laberinto)) {
+    println("si");
+    //estado = MaquinaEstados.perdiendo;
     }
 
     break;
@@ -91,13 +96,15 @@ void draw() {
 
 //Metodo para reiniciar el juego
 void reiniciarJuego() {
-  //Se RESTABLECEN todas las Clases
+  //Se restablecen todas las Clases
   estado = MaquinaEstados.iniciando;
   player = new Jugador(new PVector(width / 2, height / 2), new PVector(100, 100), 30, 30);
   joypad = new JoyPad();
+  escenario = new Escenario();
   hud = new Hud();
   laberinto = new Laberinto();
   luz = new Iluminador(4000);
+  trofeo = new ObjetoMagico(new PVector(width/2, height/2), 30, 30);
 }
 
 void keyPressed() {

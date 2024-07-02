@@ -12,7 +12,7 @@ class Jugador implements IVisualizable, IPosicionable {
     this.velocidad = velocidad;
     this.collideJugador = new Collider(ancho, alto, posicion);//Inicializacion del collider segun el ancho, alto y posicion del Jugador
     sprite = new Sprites();//Inicializacion del Sprites
-    statePlayer = MaquinaEstadosJugador.moveUp;//Estado inicial del Jugador en direccion hacia ARRIBA
+    statePlayer = MaquinaEstadosJugador.moveDown;//Estado inicial del Jugador en direccion hacia ABAJO
   }
 
   /* --- METODOS --- */
@@ -20,6 +20,7 @@ class Jugador implements IVisualizable, IPosicionable {
   void display() {
     sprite.renderJugador(this.statePlayer, this.posicion);//Llama al metodo renderJugador
     luz.mostrar(this.posicion);//Llama al metodo mostrar de Iliminador
+    //sprite.limite();
   }
 
   //Metodo para mover al jugador
@@ -45,7 +46,29 @@ class Jugador implements IVisualizable, IPosicionable {
       statePlayer = MaquinaEstadosJugador.moveRight;
       break;
     }
+    
+    verificarBorde();
   }
+
+  void verificarBorde() {
+
+    if (posicion.x < 50) {//Izquierda
+      posicion.x = 50;
+    }
+
+    if (posicion.x > 550) {//DErecha
+      posicion.x = 550;
+    }
+
+    if (posicion.y < 140) {//Arriba
+      posicion.y = 140;
+    }
+
+    if (posicion.y > 545) {//ABAjo
+      posicion.y = 545;
+    }
+  }
+
 
   //Metodo para actualiza el estado del jugador a IDLE (sin Movimiento) de cada direccion
   void detener() {
@@ -67,8 +90,13 @@ class Jugador implements IVisualizable, IPosicionable {
 
   //Metodo para detectar la colision con un ObjetoMagico
   boolean colision(ObjetoMagico obMg) {
-    return collideJugador.colision(obMg.getCollideObMg());//Verifica la colision entre el collider del Jugador con el del ObjetoMagico
+    return collideJugador.colision(obMg.getCollideObMg());
   }
+
+  boolean colision(Laberinto laberinto) {
+   // Verificar colisión con el laberinto
+   return collideJugador.colision(laberinto.getCollideLaberinto());
+   }
 
   /* --- METODOS ACCESORES --- */
   public Collider getCollideJugador() {

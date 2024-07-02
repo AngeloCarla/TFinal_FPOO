@@ -11,16 +11,23 @@ class Sprites {
 
   /* --- CONSTRUCTORES --- */
   public Sprites() {
-    this.spriteJugador = loadImage("spriteJugador.png");
+    this.spriteJugador = loadImage("spriteJugadorV.png");
     this.xFrame = 0;
     this.yFrame = 0;
-    this.widthFrame = 72;
-    this.heightFrame = 108;
+    this.widthFrame = 54;
+    this.heightFrame = 78;
     this.xFrameFloat = 0;
     this.nextxFrameFloat = widthFrame;
     this.velTransicion = 10;
   }
-
+/*
+  void limite() {
+    rectMode(CENTER);
+    noFill();
+    stroke(0, 255, 0);
+    rect(player.getPosicion().x, player.getPosicion().y, widthFrame, heightFrame);
+  }
+*/
   /* --- METODOS --- */
   //Metodo que se encarga de renderizar al personaje dependiendo del estado en el que se encuentra
   public void renderJugador(int state, PVector posicion) {

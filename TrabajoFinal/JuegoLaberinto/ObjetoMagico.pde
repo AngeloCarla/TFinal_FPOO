@@ -20,8 +20,9 @@ class ObjetoMagico implements IVisualizable, IPosicionable {
 
   //Metodo para detectar una colison con Jugador
   boolean colision(Jugador jugador) {
-    return jugador.getCollideJugador().colision(getCollideObMg());//Verificia la colision entre el collider de ObjetoMagico con Jugador
+    return jugador.getCollideJugador().colision(getCollideObMg());
   }
+
 
   /* --- METODOS ACCESORES --- */
   public Collider getCollideObMg() {

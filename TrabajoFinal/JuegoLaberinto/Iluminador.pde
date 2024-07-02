@@ -36,7 +36,7 @@ class Iluminador {
     if (encendida) {//Si el Iluminador esta encendidio se dibuja un ellipse alrededor del Jugador y del ObjetoMagico simulando una Luz
       noStroke();
       ellipseMode(CENTER);
-      fill(250, 240, 149, 50);//R, G, B, value transparecia
+      fill(250, 240, 149, 25);//R, G, B, value transparecia
       ellipse(posicion.x, posicion.y, 50, 50);
     }
   }
