@@ -7,6 +7,10 @@ private Hud hud;//Clase Hud
 private Iluminador luz;// Clase Iluminador
 private ObjetoMagico trofeo;//Clase ObjetoMagico
 private int estado = MaquinaEstados.iniciando;//Establece el esatdo INICIAL a INICIANDO
+import ddf.minim.*;
+Minim minim;
+private AudioPlayer audioI;//Almacena la musica de la pantalla de inicio
+private AudioPlayer audioJ;//Almacena la musica cuando se esta jugando
 
 /* --- METODOS --- */
 void setup() {
@@ -19,6 +23,9 @@ void setup() {
   hud = new Hud();//Inicializacion del HUD
   luz = new Iluminador(4000);//Inicializa la clase Iluminador con 4000 de duracion equivalente a 4s
   trofeo = new ObjetoMagico(new PVector(65, 470), 30, 30);//Inicializacion del ObjetoMagico alias Trofeo
+  minim = new Minim (this);
+  audioI = minim.loadFile("InterstellarSpace.wav");
+  audioJ = minim.loadFile("Easter-Wonders.wav");   
 }
 
 void draw() {
@@ -29,14 +36,19 @@ void draw() {
    Inciando, Jugando, Ganando y Perdiendo */
   switch(estado) {
   case MaquinaEstados.iniciando://Pantalla de Inicio
+    noTint();//Permite que la imagen no se coloree
     image(loadImage("inicio.jpg"), 0, 0, 600, 600);//Imagen de Fondo de la Pantalla de Inicio
-    image(loadImage("titulo.png"), 0, - 210, 600, 600);//Imagen del Titulo de la Pantalla de Inicio
+    tint(#CE3491);//Colorea la imagen 
+    image(loadImage("titulo.png"), 0, - 150, 600, 600);//Imagen del Titulo de la Pantalla de Inicio
+    audioI.play();//Reproduce la musica de inicio
     break;
   case MaquinaEstados.jugando://Pantalla de Juego
     laberinto.display();//Muestra el escenario
     hud.display();//Muestra el Hud
     trofeo.display();//Muestra al Trofeo
-    escenario.display();
+    escenario.display();//Muestra el escenario
+    audioI.pause();//Pone en pausa la musica de inicio
+    audioJ.play();//Reproduce la musica cuando se esta jugando
 
     /* --- Establece el JOYPAD ---
      Arriba, Abajo, Izquierda y Derecha */
@@ -84,6 +96,7 @@ void draw() {
     textSize(20);
     fill(255);
     text("¡Has Ganado!", width/2, height/2);//Muestra un mensaje ¡Has Ganado! al pasar al estado GANANDO
+    audioJ.pause();//Reproduce la musica de cuando se esta jugando
     break;
   case MaquinaEstados.perdiendo://Pantalla Perdedora
     textAlign(CENTER);

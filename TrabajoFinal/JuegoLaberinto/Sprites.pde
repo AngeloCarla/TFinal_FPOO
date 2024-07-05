@@ -76,6 +76,7 @@ class Sprites {
     }
 
     // Renderiza la imagen del jugador con el frame ajustado según el estado
+  
     image(spriteJugador.get(this.xFrame, yFrame, widthFrame, heightFrame), posicion.x, posicion.y, 30, 30);
 
     // Si el jugador no está en estado idle, avanza la animación
