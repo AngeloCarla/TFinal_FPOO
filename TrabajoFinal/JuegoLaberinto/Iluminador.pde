@@ -33,11 +33,11 @@ class Iluminador {
 
   //Metodo para mostrar el poder en base a la posicion del Jugador
   public void mostrar(PVector posicion) {
-    if (encendida) {//Si el Iluminador esta encendidio se dibuja un ellipse alrededor del Jugador y del ObjetoMagico simulando una Luz
-      noStroke();
+  //  if (encendida) {//Si el Iluminador esta encendidio se dibuja un ellipse alrededor del Jugador y del ObjetoMagico simulando una Luz
+      stroke(255);
       ellipseMode(CENTER);
-      fill(250, 240, 149, 25);//R, G, B, value transparecia
+      noFill();//R, G, B, value transparecia
       ellipse(posicion.x, posicion.y, 50, 50);
-    }
+    //}
   }
 }

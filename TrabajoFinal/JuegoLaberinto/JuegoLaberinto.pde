@@ -25,30 +25,29 @@ void setup() {
   trofeo = new ObjetoMagico(new PVector(65, 470), 30, 30);//Inicializacion del ObjetoMagico alias Trofeo
   minim = new Minim (this);
   audioI = minim.loadFile("InterstellarSpace.wav");
-  audioJ = minim.loadFile("Easter-Wonders.wav");   
+  audioJ = minim.loadFile("Easter-Wonders.wav");
 }
 
 void draw() {
   background(50);//Fondo
-  frameRate(30);
+  frameRate(60);
   luz.actualizar();
   /* --- Establece la MAQUINA DE ESTADOS ---
    Inciando, Jugando, Ganando y Perdiendo */
   switch(estado) {
   case MaquinaEstados.iniciando://Pantalla de Inicio
-    noTint();//Permite que la imagen no se coloree
-    image(loadImage("inicio.jpg"), 0, 0, 600, 600);//Imagen de Fondo de la Pantalla de Inicio
-    tint(#CE3491);//Colorea la imagen 
-    image(loadImage("titulo.png"), 0, - 150, 600, 600);//Imagen del Titulo de la Pantalla de Inicio
-    audioI.play();//Reproduce la musica de inicio
+    noTint();
+    image(loadImage("inicio.png"), 0, 0, 600, 600);//Imagen de Fondo de la Pantalla de Inicio
+    tint(150, 255, 98);
+    image(loadImage("titulo.png"), 0, - 112, 600, 600);//Imagen del Titulo de la Pantalla de Inicio
+    //audioI.play();//Reproduce la musica de inicio
     break;
   case MaquinaEstados.jugando://Pantalla de Juego
     laberinto.display();//Muestra el escenario
-    hud.display();//Muestra el Hud
     trofeo.display();//Muestra al Trofeo
     escenario.display();//Muestra el escenario
-    audioI.pause();//Pone en pausa la musica de inicio
-    audioJ.play();//Reproduce la musica cuando se esta jugando
+    //audioI.pause();//Pone en pausa la musica de inicio
+    //audioJ.play();//Reproduce la musica cuando se esta jugando
 
     /* --- Establece el JOYPAD ---
      Arriba, Abajo, Izquierda y Derecha */
@@ -86,8 +85,8 @@ void draw() {
 
 
     if (player.colision(laberinto)) {
-    println("si");
-    //estado = MaquinaEstados.perdiendo;
+      println("si");
+      //estado = MaquinaEstados.perdiendo;
     }
 
     break;
@@ -114,7 +113,6 @@ void reiniciarJuego() {
   player = new Jugador(new PVector(width / 2, height / 2), new PVector(100, 100), 30, 30);
   joypad = new JoyPad();
   escenario = new Escenario();
-  hud = new Hud();
   laberinto = new Laberinto();
   luz = new Iluminador(4000);
   trofeo = new ObjetoMagico(new PVector(width/2, height/2), 30, 30);
@@ -130,9 +128,9 @@ void keyPressed() {
     }
   }
 
-  if (key=='e') {
-    luz.activar();
-  }
+  /*  if (key=='e') {
+   luz.activar();
+   }*/
 
   //Establece las teclas a usar para MOVER al personaje
   if (key=='w'||key=='W'||keyCode==UP) {//ARRIBA
