@@ -46,10 +46,9 @@ void draw() {
     break;
   case MaquinaEstados.jugando://Pantalla de Juego
     image(loadImage("fondoEs.png"), width/2, height/2, 600, 600);
-    laberinto.display();
-    trofeo.display();
-    player.display();//Muestra al Jugador
-    escenario.display();
+    escenario.display();//muestra el escenario
+    laberinto.display();//Muestra el laberinto
+    trofeo.display();//muestra el final
     //audioI.pause();
     //audioJ.play();
 
