@@ -4,7 +4,6 @@ private JoyPad joypad;//Clase JoyPad
 private Escenario escenario;//Clase Escenario
 private Laberinto laberinto;//Clase Laberinto
 private Hud hud;//Clase Hud
-private Iluminador luz;// Clase Iluminador
 private ObjetoMagico trofeo;//Clase ObjetoMagico
 private int estado = MaquinaEstados.iniciando;//Establece el esatdo INICIAL a INICIANDO
 import ddf.minim.*;
@@ -21,7 +20,6 @@ void setup() {
   escenario = new Escenario();//Inicializacion de Escenario
   laberinto = new Laberinto();//Inicializacion del LABERINTO
   hud = new Hud();//Inicializacion del HUD
-  luz = new Iluminador(4000);//Inicializa la clase Iluminador con 4000 de duracion equivalente a 4s
   trofeo = new ObjetoMagico(new PVector(65, 470), 30, 30);//Inicializacion del ObjetoMagico alias Trofeo
   minim = new Minim (this);
   audioI = minim.loadFile("InterstellarSpace.wav");
@@ -31,7 +29,6 @@ void setup() {
 void draw() {
   background(50);//Fondo
   frameRate(60);
-  luz.actualizar();
   /* --- Establece la MAQUINA DE ESTADOS ---
    Inciando, Jugando, Ganando y Perdiendo */
   switch(estado) {
@@ -45,39 +42,37 @@ void draw() {
     //audioI.play();//Reproduce la musica de inicio
     break;
   case MaquinaEstados.jugando://Pantalla de Juego
-    laberinto.display();//Muestra el escenario
-    trofeo.display();//Muestra al Trofeo
-    escenario.display();//Muestra el escenario
-    //audioI.pause();//Pone en pausa la musica de inicio
-    //audioJ.play();//Reproduce la musica cuando se esta jugando
+    laberinto.display();
+    trofeo.display();
+    escenario.display();
+    //audioI.pause();
+    //audioJ.play();
 
-    /* --- Establece el JOYPAD ---
-     Arriba, Abajo, Izquierda y Derecha */
     boolean move = false;
 
     if (estado == MaquinaEstados.jugando) {
       if (joypad.isUp()) {
-        player.mover(MaquinaEstadosJugador.moveUp);
+        player.mover(MaquinaEstadosJugador.moveUp, laberinto.getCollideLab());
         move = true;
       }
 
       if (joypad.isDown()) {
-        player.mover(MaquinaEstadosJugador.moveDown);
+        player.mover(MaquinaEstadosJugador.moveDown, laberinto.getCollideLab());
         move = true;
       }
 
       if (joypad.isLeft()) {
-        player.mover(MaquinaEstadosJugador.moveLeft);
+        player.mover(MaquinaEstadosJugador.moveLeft, laberinto.getCollideLab());
         move = true;
       }
 
       if (joypad.isRight()) {
-        player.mover(MaquinaEstadosJugador.moveRight);
+        player.mover(MaquinaEstadosJugador.moveRight, laberinto.getCollideLab());
         move = true;
       }
 
       if (!move) {
-        player.detener();//Detiene al personaje si no hay teclas presionadas
+        player.detener();
       }
     }
 
@@ -85,10 +80,8 @@ void draw() {
       estado = MaquinaEstados.ganando;
     }
 
-
-    if (player.colision(laberinto)) {
-      println("si");
-      //estado = MaquinaEstados.perdiendo;
+   if (player.colisionConAreas(laberinto.getCollideLab())) {
+        estado = MaquinaEstados.perdiendo; // Cambiar estado a perdiendo cuando hay colisión
     }
 
     break;
@@ -112,12 +105,15 @@ void draw() {
 void reiniciarJuego() {
   //Se restablecen todas las Clases
   estado = MaquinaEstados.iniciando;
-  player = new Jugador(new PVector(width / 2, height / 2), new PVector(100, 100), 30, 30);
-  joypad = new JoyPad();
-  escenario = new Escenario();
-  laberinto = new Laberinto();
-  luz = new Iluminador(4000);
-  trofeo = new ObjetoMagico(new PVector(width/2, height/2), 30, 30);
+  player = new Jugador(new PVector(92, 145), new PVector(100, 100), 30, 30);//Inicializacion del JUGADOR
+  joypad = new JoyPad();//Inicializacion del JOYPAD
+  escenario = new Escenario();//Inicializacion de Escenario
+  laberinto = new Laberinto();//Inicializacion del LABERINTO
+  hud = new Hud();//Inicializacion del HUD
+  trofeo = new ObjetoMagico(new PVector(65, 470), 30, 30);//Inicializacion del ObjetoMagico alias Trofeo
+  minim = new Minim (this);
+  audioI = minim.loadFile("InterstellarSpace.wav");
+  audioJ = minim.loadFile("Easter-Wonders.wav");
 }
 
 void keyPressed() {
@@ -129,10 +125,6 @@ void keyPressed() {
       reiniciarJuego(); //Reinicia el juego si está en los estados de GANANDO o PERDIENDO
     }
   }
-
-  /*  if (key=='e') {
-   luz.activar();
-   }*/
 
   //Establece las teclas a usar para MOVER al personaje
   if (key=='w'||key=='W'||keyCode==UP) {//ARRIBA

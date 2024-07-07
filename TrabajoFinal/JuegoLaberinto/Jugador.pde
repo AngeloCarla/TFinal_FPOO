@@ -5,6 +5,7 @@ class Jugador implements IVisualizable, IPosicionable {
   private Sprites sprite;//Inicializacion de Sprites
   private int statePlayer;//Estado del Jugador IDLE en sus 4 direcciones, ARRIBA, ABAJO, IZQUIERDA, DERECHA
   private Collider collideJugador;
+  private PVector posicionAnterior;
 
   /* --- CONSTRUCTOR --- */
   public Jugador(PVector posicion, PVector velocidad, int ancho, int alto) {
@@ -19,33 +20,43 @@ class Jugador implements IVisualizable, IPosicionable {
   //Metodo para visualizar al Jugador
   void display() {
     sprite.renderJugador(this.statePlayer, this.posicion);//Llama al metodo renderJugador
-    //luz.mostrar(this.posicion);//Llama al metodo mostrar de Iliminador
   }
 
   //Metodo para mover al jugador
-  void mover(int direccion) {
+   void mover(int direccion, ArrayList<Collider> colliders) {
+    PVector deltaTime = PVector.mult(velocidad, Time.getDeltaTime(frameRate));
+    PVector nuevaPosicion = posicion.copy();
 
-    PVector deltaTime = PVector.mult(velocidad, Time.getDeltaTime(frameRate));//Implementacion del DeltaTime
-    switch(direccion) {
-
-    case MaquinaEstadosJugador.moveUp://ARRIBA
-      posicion.y -= deltaTime.y;
-      statePlayer = MaquinaEstadosJugador.moveUp;
-      break;
-    case MaquinaEstadosJugador.moveDown://ABAJO
-      posicion.y += deltaTime.y;
-      statePlayer = MaquinaEstadosJugador.moveDown;
-      break;
-    case MaquinaEstadosJugador.moveLeft://iZQUIERDA
-      posicion.x -= deltaTime.x;
-      statePlayer = MaquinaEstadosJugador.moveLeft;
-      break;
-    case MaquinaEstadosJugador.moveRight://DERECHA
-      posicion.x += deltaTime.x;
-      statePlayer = MaquinaEstadosJugador.moveRight;
-      break;
-    }
+    switch (direccion) {
+      case MaquinaEstadosJugador.moveUp:
+        nuevaPosicion.y -= deltaTime.y;
+        statePlayer = MaquinaEstadosJugador.moveUp;
+        break;
+      case MaquinaEstadosJugador.moveDown:
+        nuevaPosicion.y += deltaTime.y;
+        statePlayer = MaquinaEstadosJugador.moveDown;
+        break;
+      case MaquinaEstadosJugador.moveLeft:
+        nuevaPosicion.x -= deltaTime.x;
+        statePlayer = MaquinaEstadosJugador.moveLeft;
+        break;
+      case MaquinaEstadosJugador.moveRight:
+        nuevaPosicion.x += deltaTime.x;
+        statePlayer = MaquinaEstadosJugador.moveRight;
+        break;
     
+    }
+
+    posicionAnterior = posicion.copy(); // Guarda la posición anterior
+    posicion = nuevaPosicion; // Mueve al jugador a la nueva posición
+
+    collideJugador.setPosicion(posicion); // Actualiza la posición del collider del jugador
+
+    if (colisionConAreas(colliders)) {
+      posicion = posicionAnterior; // Restaura la posición anterior en caso de colisión
+      collideJugador.setPosicion(posicion); // Restaura la posición del collider del jugador
+    }
+
     verificarBorde();
   }
 
@@ -88,14 +99,18 @@ class Jugador implements IVisualizable, IPosicionable {
   }
 
   //Metodo para detectar la colision con un ObjetoMagico
-  boolean colision(ObjetoMagico obMg) {
+  boolean colision(ObjetoMagico obMg) { 
     return collideJugador.colision(obMg.getCollideObMg());
   }
 
-  boolean colision(Laberinto laberinto) {
-   // Verificar colisión con el laberinto
-   return collideJugador.colision(laberinto.getCollideLaberinto());
-   }
+ boolean colisionConAreas(ArrayList<Collider> areasColision) {
+    for (Collider area : areasColision) {
+      if (collideJugador.colision(area)) {
+        return true;
+      }
+    }
+    return false;
+  }
 
   /* --- METODOS ACCESORES --- */
   public Collider getCollideJugador() {
