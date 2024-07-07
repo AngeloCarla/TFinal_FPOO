@@ -10,8 +10,6 @@ class Escenario {
   public void display() {
     dibujarBordeS();//Borde Superior del Laberinto
     dibujarBordeI();//Borde Inferior del Laberinto
-  //  activarOscuridad();
-    player.display();//Muestra al Jugador
     hud.display();//Muestra el Hud
   }
 
@@ -27,10 +25,5 @@ class Escenario {
     noTint();//Permite que no se coloree la imagen
     imageMode(CENTER);
     image(bordeI, width/2, height/2, 600, 600);
-  }
-
-  void activarOscuridad() {
-    fill(0, 200);
-    rect(0, 0, width, height);
   }
 }

@@ -23,19 +23,30 @@ class Laberinto implements IVisualizable {
     collideLab.add(new Collider(55, 4, new PVector(500, 435)));//5.3
     collideLab.add(new Collider(45, 5, new PVector(175, 495)));//6.1
     collideLab.add(new Collider(220, 5, new PVector(276, 495)));//6.2
-    
+
     //VERTICAL
-    collideLab.add(new Collider(10, 60, new PVector(165, 150)));//1.1
+    collideLab.add(new Collider(8, 60, new PVector(165, 150)));//1.1
+    collideLab.add(new Collider(8, 60, new PVector(279, 150)));//1.2
+    collideLab.add(new Collider(8, 50, new PVector(224, 225)));//2.1
+    collideLab.add(new Collider(8, 50, new PVector(447, 225)));//2.2
+    collideLab.add(new Collider(8, 40, new PVector(115, 270)));//3.1
+    collideLab.add(new Collider(4, 40, new PVector(340, 270)));//3.2
+    collideLab.add(new Collider(4, 50, new PVector(170, 320)));//4.1
+    collideLab.add(new Collider(4, 50, new PVector(280, 340)));//4.2
+    collideLab.add(new Collider(4, 50, new PVector(392, 340)));//4.3
+    collideLab.add(new Collider(4, 50, new PVector(115, 395)));//5.1
+    collideLab.add(new Collider(4, 50, new PVector(506, 395)));//5.2
+    collideLab.add(new Collider(4, 50, new PVector(280, 440)));//6.1
+    collideLab.add(new Collider(3, 50, new PVector(446, 440)));//6.2
+    collideLab.add(new Collider(4, 50, new PVector(176, 510)));//7.1
   }
 
   /* --- METODOS --- */
   public void display() {
-    imageMode(CENTER);
     image(laberinto, width/2, height/2, 600, 600);
   }
 
   /* --- METODOS ACCESORES --- */
-
   public ArrayList<Collider> getCollideLab() {
     return collideLab;
   }

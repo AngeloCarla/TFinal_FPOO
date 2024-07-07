@@ -23,28 +23,27 @@ class Jugador implements IVisualizable, IPosicionable {
   }
 
   //Metodo para mover al jugador
-   void mover(int direccion, ArrayList<Collider> colliders) {
+  void mover(int direccion, ArrayList<Collider> colliders) {
     PVector deltaTime = PVector.mult(velocidad, Time.getDeltaTime(frameRate));
     PVector nuevaPosicion = posicion.copy();
 
     switch (direccion) {
-      case MaquinaEstadosJugador.moveUp:
-        nuevaPosicion.y -= deltaTime.y;
-        statePlayer = MaquinaEstadosJugador.moveUp;
-        break;
-      case MaquinaEstadosJugador.moveDown:
-        nuevaPosicion.y += deltaTime.y;
-        statePlayer = MaquinaEstadosJugador.moveDown;
-        break;
-      case MaquinaEstadosJugador.moveLeft:
-        nuevaPosicion.x -= deltaTime.x;
-        statePlayer = MaquinaEstadosJugador.moveLeft;
-        break;
-      case MaquinaEstadosJugador.moveRight:
-        nuevaPosicion.x += deltaTime.x;
-        statePlayer = MaquinaEstadosJugador.moveRight;
-        break;
-    
+    case MaquinaEstadosJugador.moveUp:
+      nuevaPosicion.y -= deltaTime.y;
+      statePlayer = MaquinaEstadosJugador.moveUp;
+      break;
+    case MaquinaEstadosJugador.moveDown:
+      nuevaPosicion.y += deltaTime.y;
+      statePlayer = MaquinaEstadosJugador.moveDown;
+      break;
+    case MaquinaEstadosJugador.moveLeft:
+      nuevaPosicion.x -= deltaTime.x;
+      statePlayer = MaquinaEstadosJugador.moveLeft;
+      break;
+    case MaquinaEstadosJugador.moveRight:
+      nuevaPosicion.x += deltaTime.x;
+      statePlayer = MaquinaEstadosJugador.moveRight;
+      break;
     }
 
     posicionAnterior = posicion.copy(); // Guarda la posición anterior
@@ -99,11 +98,11 @@ class Jugador implements IVisualizable, IPosicionable {
   }
 
   //Metodo para detectar la colision con un ObjetoMagico
-  boolean colision(ObjetoMagico obMg) { 
+  boolean colision(ObjetoMagico obMg) {
     return collideJugador.colision(obMg.getCollideObMg());
   }
 
- boolean colisionConAreas(ArrayList<Collider> areasColision) {
+  boolean colisionConAreas(ArrayList<Collider> areasColision) {
     for (Collider area : areasColision) {
       if (collideJugador.colision(area)) {
         return true;

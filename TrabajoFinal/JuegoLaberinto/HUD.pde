@@ -1,14 +1,13 @@
 class Hud implements IVisualizable {
   /* Clase que se encarga de visualizar el Hud en pantalla, Tiempo de Juego */
+
   /* --- ATRIBUTOS --- */
   private int tiempoInicial; // Establece el tiempo inicial del juego en milisegundos
-  private int duracion;      // Duración total del contador en milisegundos
-  private int tiempoRestante; // Tiempo restante del juego en milisegundos
+  private int tiempoTranscurrido; // Duración total del contador en milisegundos
 
   /* --- CONSTRUCTORES --- */
   public Hud() {
-    duracion = 60 * 1000;  // Establece la duración en 1 minuto (60 segundos)
-    reiniciarTiempo();     // Inicializa el tiempo inicial
+    reiniciarTiempo(); // Inicializa el tiempo inicial
   }
 
   /* --- METODOS --- */
@@ -22,24 +21,33 @@ class Hud implements IVisualizable {
     textAlign(CENTER);
     textSize(20);
     fill(255);
-    tiempoRestante = duracion - (millis() - tiempoInicial); // Calcula el tiempo restante
-
-    if (tiempoRestante < 0) {
-      tiempoRestante = 0; // Asegura que el tiempo restante no sea negativo
-    }
-
-    int segundos = tiempoRestante / 1000; // Calcula los segundos restantes
 
     if (estado == MaquinaEstados.jugando) {
-      text("Tiempo: " + segundos / 60 + ":" + segundos % 60, width/2, 30); // Muestra el tiempo en pantalla mientras el juego esté en el estado JUGANDO
+      tiempoTranscurrido = millis() - tiempoInicial; // Calcula el tiempo transcurrido desde el inicio del juego
+      int tiempo = tiempoTranscurrido / 1000; // Convierte el tiempo a segundos
+
+      // Verifica si el tiempo ha superado los 30 segundos
+      if (tiempo > 30) {
+        estado = MaquinaEstados.perdiendo; // Cambia el estado a perdiendo si el tiempo supera los 30 segundos
+      }
+
+      text("Tiempo: " + tiempo, width/2, 40); // Muestra el tiempo transcurrido en pantalla
     }
-    if (tiempoRestante <= 0) {
-      estado = MaquinaEstados.perdiendo;
-      reiniciarJuego();
+
+    if (estado == MaquinaEstados.ganando || estado == MaquinaEstados.perdiendo) {
+      int tiempo = tiempoTranscurrido / 1000; // Calcula los segundos transcurridos
+      text("Tiempo Final: " + tiempo, width/2, 190); // Muestra el tiempo final en pantalla
     }
   }
+
   // Método para restablecer el tiempo
   void reiniciarTiempo() {
-    tiempoInicial = millis();
+    tiempoInicial = millis(); // Establece el tiempo inicial en el momento actual
+    tiempoTranscurrido = 0; // Resetea el tiempo transcurrido
+  }
+
+  /* --- METODOS ACCESORES --- */
+  int getTiempoTranscurrido() {
+    return tiempoTranscurrido; // Devuelve el tiempo transcurrido
   }
 }

@@ -6,6 +6,7 @@ private Laberinto laberinto;//Clase Laberinto
 private Hud hud;//Clase Hud
 private ObjetoMagico trofeo;//Clase ObjetoMagico
 private int estado = MaquinaEstados.iniciando;//Establece el esatdo INICIAL a INICIANDO
+private PImage fondo;
 import ddf.minim.*;
 Minim minim;
 private AudioPlayer audioI;//Almacena la musica de la pantalla de inicio
@@ -15,6 +16,7 @@ private AudioPlayer audioJ;//Almacena la musica cuando se esta jugando
 void setup() {
   size(600, 600);//Establece el tamaño del lienzo
   frameRate(60);//Estable el FrameRate a 60 Frames Por Segundo (FPS)
+  fondo = loadImage("inicio.png");
   player = new Jugador(new PVector(92, 145), new PVector(100, 100), 30, 30);//Inicializacion del JUGADOR
   joypad = new JoyPad();//Inicializacion del JOYPAD
   escenario = new Escenario();//Inicializacion de Escenario
@@ -30,21 +32,12 @@ void draw() {
   background(50);//Fondo
   frameRate(60);
 
-  int mouseXCoord = mouseX;
-  int mouseYCoord = mouseY;
-  
-  fill(255, 0, 0); // Color rojo
-  noStroke();
-  ellipse(mouseXCoord, mouseYCoord, 10, 10);
-  
-  println("x" + mouseXCoord,"y" + mouseYCoord);
-  
   /* --- Establece la MAQUINA DE ESTADOS ---
    Inciando, Jugando, Ganando y Perdiendo */
   switch(estado) {
   case MaquinaEstados.iniciando://Pantalla de Inicio
     noTint();
-    image(loadImage("inicio.png"), 0, 0, 600, 600);//Imagen de Fondo de la Pantalla de Inicio
+    image(fondo, 0, 0, 600, 600);//Imagen de Fondo de la Pantalla de Inicio
     tint(69, 131, 38);
     image(loadImage("enter.png"), 150, 300, 300, 300);
     tint(150, 255, 98);
@@ -52,8 +45,10 @@ void draw() {
     //audioI.play();//Reproduce la musica de inicio
     break;
   case MaquinaEstados.jugando://Pantalla de Juego
+    image(loadImage("fondoEs.png"), width/2, height/2, 600, 600);
     laberinto.display();
     trofeo.display();
+    player.display();//Muestra al Jugador
     escenario.display();
     //audioI.pause();
     //audioJ.play();
@@ -96,17 +91,15 @@ void draw() {
 
     break;
   case MaquinaEstados.ganando://Pantalla Ganadora
-    textAlign(CENTER);
-    textSize(20);
-    fill(255);
-    text("¡Has Ganado!", width/2, height/2);//Muestra un mensaje ¡Has Ganado! al pasar al estado GANANDO
+    image(fondo, width/2, height/2, 600, 600);//Imagen de Fondo de la Pantalla de Inicio
+    image(loadImage("ganaste.png"), width/2, 100, 400, 400);
     audioJ.pause();//Reproduce la musica de cuando se esta jugando
+    hud.display();
     break;
   case MaquinaEstados.perdiendo://Pantalla Perdedora
-    textAlign(CENTER);
-    textSize(20);
-    fill(255);
-    text("¡Has Perdido!", width/2, height/2);//Muestra un mensaje ¡Has Perdido! al pasar al estado PERDIENDO
+    image(fondo, width/2, height/2, 600, 600);//Imagen de Fondo de la Pantalla de Inicio
+    image(loadImage("perdiste.png"), width/2, 100, 400, 400);
+    hud.display();
     break;
   }
 }
