@@ -29,6 +29,16 @@ void setup() {
 void draw() {
   background(50);//Fondo
   frameRate(60);
+
+  int mouseXCoord = mouseX;
+  int mouseYCoord = mouseY;
+  
+  fill(255, 0, 0); // Color rojo
+  noStroke();
+  ellipse(mouseXCoord, mouseYCoord, 10, 10);
+  
+  println("x" + mouseXCoord,"y" + mouseYCoord);
+  
   /* --- Establece la MAQUINA DE ESTADOS ---
    Inciando, Jugando, Ganando y Perdiendo */
   switch(estado) {
@@ -80,8 +90,8 @@ void draw() {
       estado = MaquinaEstados.ganando;
     }
 
-   if (player.colisionConAreas(laberinto.getCollideLab())) {
-        estado = MaquinaEstados.perdiendo; // Cambiar estado a perdiendo cuando hay colisión
+    if (player.colisionConAreas(laberinto.getCollideLab())) {
+      estado = MaquinaEstados.perdiendo; // Cambiar estado a perdiendo cuando hay colisión
     }
 
     break;
