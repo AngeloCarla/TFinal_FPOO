@@ -19,7 +19,7 @@ class Jugador implements IVisualizable, IPosicionable {
   //Metodo para visualizar al Jugador
   void display() {
     sprite.renderJugador(this.statePlayer, this.posicion);//Llama al metodo renderJugador
-    luz.mostrar(this.posicion);//Llama al metodo mostrar de Iliminador
+    //luz.mostrar(this.posicion);//Llama al metodo mostrar de Iliminador
   }
 
   //Metodo para mover al jugador

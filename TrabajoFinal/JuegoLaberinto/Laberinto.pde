@@ -23,10 +23,10 @@ class Laberinto implements IVisualizable {
     //noStroke();
     //fill(15, 180, 60);
     //HORIZONTAL
-    image(celdaHorizontal,posicion.x + bs+25, posicion.y + bs-5);  
-    image(celdaHorizontal,posicion.x + bs*4+20, posicion.y + bs-5);
-    image(celdaHorizontal,posicion.x + bs*6+25, posicion.y + bs-5);
-    image(celdaHorizontal,posicion.x + bs*6+80, posicion.y + bs-5);
+    image(celdaHorizontal,posicion.x + bs+25, posicion.y + bs-5);//1.1  
+    image(celdaHorizontal,posicion.x + bs*4+20, posicion.y + bs-5);//1.2
+    image(celdaHorizontal,posicion.x + bs*6+25, posicion.y + bs-5);//1.3
+    image(celdaHorizontal,posicion.x + bs*6+80, posicion.y + bs-5);//1.4
     image(celdaHorizontal,posicion.x+30, posicion.y + bs*2-5);
     image(celdaHorizontal,posicion.x+100, posicion.y + bs*2-5);
     image(celdaHorizontal,posicion.x+170, posicion.y + bs*2-5);
@@ -72,7 +72,7 @@ class Laberinto implements IVisualizable {
 
     //VERTICAl
     //fill(16, 129, 47);
-    image(celdaVertical,posicion.x + bs-3, posicion.y + bs*2-30);  
+    image(celdaVertical,posicion.x + bs-3, posicion.y + bs*2-30);//1.1  
     image(celdaVertical,posicion.x + bs-3, posicion.y + bs*4-35);
     image(celdaVertical,posicion.x + bs*2-3, posicion.y-30);
     image(celdaVertical,posicion.x + bs*2-3, posicion.y + bs*3-30);

@@ -10,7 +10,7 @@ class Escenario {
   public void display() {
     dibujarBordeS();//Borde Superior del Laberinto
     dibujarBordeI();//Borde Inferior del Laberinto
-    activarOscuridad();
+  //  activarOscuridad();
     player.display();//Muestra al Jugador
     hud.display();//Muestra el Hud
   }

@@ -38,6 +38,8 @@ void draw() {
   case MaquinaEstados.iniciando://Pantalla de Inicio
     noTint();
     image(loadImage("inicio.png"), 0, 0, 600, 600);//Imagen de Fondo de la Pantalla de Inicio
+    tint(69, 131, 38);
+    image(loadImage("enter.png"), 150, 300, 300, 300);
     tint(150, 255, 98);
     image(loadImage("titulo.png"), 0, - 112, 600, 600);//Imagen del Titulo de la Pantalla de Inicio
     //audioI.play();//Reproduce la musica de inicio
