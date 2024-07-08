@@ -20,18 +20,11 @@ class Sprites {
     this.nextxFrameFloat = widthFrame;
     this.velTransicion = 10;
   }
-  /*
-  void limite() {
-   rectMode(CENTER);
-   noFill();
-   stroke(0, 255, 0);
-   rect(player.getPosicion().x, player.getPosicion().y, widthFrame, heightFrame);
-   }
-   */
+
   /* --- METODOS --- */
   //Metodo que se encarga de renderizar al personaje dependiendo del estado en el que se encuentra
   public void renderJugador(int state, PVector posicion) {
-    imageMode(CENTER);
+    //imageMode(CENTER);
     //Implementacion del DeltaTime
     int framesPorSegundo = round(frameRate);
     float deltaTime = Time.getDeltaTime(framesPorSegundo);

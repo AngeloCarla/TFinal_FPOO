@@ -1,7 +1,7 @@
 class ObjetoMagico implements IVisualizable, IPosicionable {
   /* --- ATRIBUTOS --- */
-  private PVector posicion;//Posicion de las gemas
-  private PImage gema;
+  private PVector posicion; //Posicion de las gemas
+  private PImage gema; //Imagen de las gemas
   private int tamano; //Tamaño de las gemas
 
   /* --- CONSTRUCTORES --- */
@@ -15,7 +15,7 @@ class ObjetoMagico implements IVisualizable, IPosicionable {
   //Metodo para Visualizar el objetoMagico
   void display() {
     imageMode(CENTER);
-    image(gema, posicion.x, posicion.y, 100, 150);
+    image(gema, posicion.x, posicion.y, tamano, tamano);
   }
 
   /* --- METODOS ACCESORES --- */

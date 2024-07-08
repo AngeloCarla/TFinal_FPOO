@@ -27,7 +27,7 @@ class Hud implements IVisualizable {
       int tiempo = tiempoTranscurrido / 1000; // Convierte el tiempo a segundos
 
       // Verifica si el tiempo ha superado los 30 segundos
-      if (tiempo > 40) {
+      if (tiempo > 60) {
         estado = MaquinaEstados.perdiendo; // Cambia el estado a perdiendo si el tiempo supera los 30 segundos
       }
 
@@ -36,7 +36,7 @@ class Hud implements IVisualizable {
 
     if (estado == MaquinaEstados.ganando || estado == MaquinaEstados.perdiendo) {
       int tiempo = tiempoTranscurrido / 1000; // Calcula los segundos transcurridos
-      text("Tiempo Final: " + tiempo + "s", width/2, 200); // Muestra el tiempo final en pantalla
+      text("Tiempo Final: " + tiempo + "s", width/2, 255); // Muestra el tiempo final en pantalla
     }
   }
 

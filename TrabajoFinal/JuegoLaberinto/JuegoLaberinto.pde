@@ -48,9 +48,10 @@ void draw() {
     //audioI.play();//Reproduce la musica de inicio
     break;
   case MaquinaEstados.jugando://Pantalla de Juego
-    image(loadImage("fondoEs.png"), width/2, height/2, 600, 600);
+    //image(loadImage("fondoEs.png"), width/2, height/2, 600, 600);
+    escenario.display();
     laberinto.display();//Muestra el laberinto
-    escenario.display();//Muestra el escenario
+    //Muestra el escenario
     escenario.recolectarGemas(player);
     //audioI.pause();
     //audioJ.play();
@@ -87,14 +88,14 @@ void draw() {
     break;
   case MaquinaEstados.ganando://Pantalla Ganadora
     image(fondo, width/2, height/2, 600, 600);//Imagen de Fondo de la Pantalla de Inicio
-    image(loadImage("hud.png"), width/2, 205, 200, 100);
+    image(loadImage("hud.png"), width/2, 250, 200, 100);
     image(loadImage("ganaste.png"), width/2, 130, 500, 500);
     audioJ.pause();//Reproduce la musica de cuando se esta jugando
     hud.display();
     break;
   case MaquinaEstados.perdiendo://Pantalla Perdedora
     image(fondo, width/2, height/2, 600, 600);//Imagen de Fondo de la Pantalla de Inicio
-    image(loadImage("hud.png"), width/2, 205, 200, 100);
+    image(loadImage("hud.png"), width/2, 250, 200, 100);
     image(loadImage("perdiste.png"), width/2, 130, 500, 500);
     hud.display();
     break;

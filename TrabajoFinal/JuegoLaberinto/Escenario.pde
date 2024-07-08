@@ -3,36 +3,44 @@ class Escenario {
   private PImage bordeS; //Imagen del borde inferior del laberinto
   private ArrayList<ObjetoMagico> gemas; //Arraylist para almacenar las gemas
   private int gemasRecolectadas;
+  private PImage fondo;
 
   public Escenario() {
     bordeI = loadImage("bordeI.png");
     bordeS = loadImage("bordeS.png");
     gemas = new ArrayList<ObjetoMagico>();
     gemasRecolectadas = 0;
+    fondo = loadImage("fondoEs.png");
   }
 
   public void display() {
-    for (ObjetoMagico g : gemas) {
-      g.display(); //Muestra las gemas en el escenario
-    }
+    dibujarFondo();
     dibujarBordeS();//Borde Superior del Laberinto
     dibujarBordeI();//Borde Inferior del Laberinto
     player.display();//Muestra al Jugador
     hud.display();//Muestra el Hud
+    
+    for (ObjetoMagico g : gemas) {
+      g.display(); //Muestra las gemas en el escenario
+    }
   }
 
   //Metodo que dibuja el borde Superior del Laberinto
   void dibujarBordeS() {
-    imageMode(CENTER);
+    //imageMode(CENTER);
     noTint();//No colorea la imagen
     image(bordeS, width/2, height/2, 600, 600);
   }
 
   //Metodo que dibuja el borde Inferior del Laberinto
   void dibujarBordeI() {
-    noTint();//Permite que no se coloree la imagen
-    imageMode(CENTER);
+    //noTint();//Permite que no se coloree la imagen
+    //imageMode(CENTER);
     image(bordeI, width/2, height/2, 600, 600);
+  }
+  
+  void dibujarFondo(){
+    image(fondo, width/2, height/2, 600, 600);
   }
 
   /**Agrega las gemas en el Arraylist*/
