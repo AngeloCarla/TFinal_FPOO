@@ -45,14 +45,14 @@ void draw() {
     image(loadImage("enter.png"), 150, 300, 300, 300);
     tint(150, 255, 98);
     image(loadImage("titulo.png"), 0, - 112, 600, 600);//Imagen del Titulo de la Pantalla de Inicio
-    //audioI.play();//Reproduce la musica de inicio
+    audioI.play();//Reproduce la musica de inicio
     break;
   case MaquinaEstados.jugando://Pantalla de Juego
     escenario.display(); //Muestra el escenario
     laberinto.display(); //Muestra el laberinto
     escenario.recolectarGemas(player); //Hace que el metodo que elimina las gemas se ejecute
-    //audioI.pause();
-    //audioJ.play();
+    audioI.pause(); //Pausa la musica de inicio
+    audioJ.play(); //Reproduce la musica en el momento de jugar
 
     boolean move = false;
 
@@ -88,7 +88,7 @@ void draw() {
     image(fondo, width/2, height/2, 600, 600);//Imagen de Fondo de la Pantalla de Inicio
     image(loadImage("hud.png"), width/2, 250, 200, 100);
     image(loadImage("ganaste.png"), width/2, 130, 500, 500);
-    audioJ.pause();//Reproduce la musica de cuando se esta jugando
+    audioJ.pause();//Pausa la musica de cuando se esta jugando
     hud.display(); //Muestra lo que hay en el HUD
     break;
   case MaquinaEstados.perdiendo://Pantalla Perdedora
