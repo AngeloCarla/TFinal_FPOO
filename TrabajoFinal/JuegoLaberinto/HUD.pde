@@ -31,7 +31,7 @@ class Hud implements IVisualizable {
         estado = MaquinaEstados.perdiendo; // Cambia el estado a perdiendo si el tiempo supera los 30 segundos
       }
 
-      text("Tiempo: " + tiempo, width/2, 40); // Muestra el tiempo transcurrido en pantalla
+      text(tiempo + "s", 310, 30); // Muestra el tiempo transcurrido en pantalla
     }
 
     if (estado == MaquinaEstados.ganando || estado == MaquinaEstados.perdiendo) {
