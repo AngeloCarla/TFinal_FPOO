@@ -1,12 +1,12 @@
 class ObjetoMagico implements IVisualizable, IPosicionable {
   /* --- ATRIBUTOS --- */
-  private PVector posicion;//Posicion del ObjetoMagico
-  private Collider collideObMg;//Collider del ObjetoMagico
+  private PVector posicion;//Posicion de las gemas
+  private int tamano; //Tamaño de las gemas
 
   /* --- CONSTRUCTORES --- */
-  public ObjetoMagico(PVector posicion, int ancho, int alto) {
+  public ObjetoMagico(PVector posicion, int tamano) {
     this.posicion = posicion;
-    this.collideObMg = new Collider(ancho, alto, posicion);//Inicializa el collider segun el ancho, alto y posicion del ObjetoMagico
+    this.tamano = tamano;
   }
 
   /* --- METODOS --- */
@@ -14,25 +14,19 @@ class ObjetoMagico implements IVisualizable, IPosicionable {
   void display() {
     noStroke();
     fill(90, 193, 106);
-    ellipse(posicion.x, posicion.y, 30, 30);
+    ellipse(this.posicion.x, this.posicion.y, tamano, tamano);
   }
-
-  //Metodo para detectar una colison con Jugador
-  boolean colision(Jugador jugador) {
-    return jugador.getCollideJugador().colision(getCollideObMg());
-  }
-
 
   /* --- METODOS ACCESORES --- */
-  public Collider getCollideObMg() {
-    return collideObMg;
-  }
-
   public PVector getPosicion() {
     return posicion;
   }
 
   void setPosicion(PVector posicion) {
     this.posicion = posicion;
+  }
+  
+  public int getTamano() {
+    return tamano;
   }
 }

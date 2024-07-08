@@ -78,7 +78,6 @@ class Jugador implements IVisualizable, IPosicionable {
     }
   }
 
-
   //Metodo para actualiza el estado del jugador a IDLE (sin Movimiento) de cada direccion
   void detener() {
     switch (statePlayer) {
@@ -96,12 +95,14 @@ class Jugador implements IVisualizable, IPosicionable {
       break;
     }
   }
-
-  //Metodo para detectar la colision con un ObjetoMagico
-  boolean colision(ObjetoMagico obMg) {
-    return collideJugador.colision(obMg.getCollideObMg());
+  
+  /**Metodo booleano para verificar que si hay colision entre las gemas y el jugador*/
+  boolean recolectarGemas(ObjetoMagico g) {
+    float distancia = dist(posicion.x + collideJugador.getAncho() / 2, posicion.y + collideJugador.getAlto() / 2, g.getPosicion().x, g.getPosicion().y);
+    return distancia < ( collideJugador.getAncho()/ 2 + g.getTamano() / 2);
   }
-
+  
+  /**Metodo booleano para verificar que si hay colision entre  y el jugador*/ 
   boolean colisionConAreas(ArrayList<Collider> areasColision) {
     for (Collider area : areasColision) {
       if (collideJugador.colision(area)) {

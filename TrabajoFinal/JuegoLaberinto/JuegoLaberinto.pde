@@ -4,7 +4,6 @@ private JoyPad joypad;//Clase JoyPad
 private Escenario escenario;//Clase Escenario
 private Laberinto laberinto;//Clase Laberinto
 private Hud hud;//Clase Hud
-private ObjetoMagico trofeo;//Clase ObjetoMagico
 private int estado = MaquinaEstados.iniciando;//Establece el esatdo INICIAL a INICIANDO
 private PImage fondo;
 import ddf.minim.*;
@@ -22,10 +21,14 @@ void setup() {
   escenario = new Escenario();//Inicializacion de Escenario
   laberinto = new Laberinto();//Inicializacion del LABERINTO
   hud = new Hud();//Inicializacion del HUD
-  trofeo = new ObjetoMagico(new PVector(65, 470), 30, 30);//Inicializacion del ObjetoMagico alias Trofeo
   minim = new Minim (this);
   audioI = minim.loadFile("InterstellarSpace.wav");
   audioJ = minim.loadFile("Easter-Wonders.wav");
+  
+  escenario.agregarGemas(new ObjetoMagico(new PVector(535,165), 30));
+  escenario.agregarGemas(new ObjetoMagico(new PVector(213,330), 30));
+  escenario.agregarGemas(new ObjetoMagico(new PVector(100,500), 30));
+  escenario.agregarGemas(new ObjetoMagico(new PVector(350,450), 30));
 }
 
 void draw() {
@@ -47,8 +50,8 @@ void draw() {
   case MaquinaEstados.jugando://Pantalla de Juego
     image(loadImage("fondoEs.png"), width/2, height/2, 600, 600);
     laberinto.display();//Muestra el laberinto
-    escenario.display();//muestra el escenario
-    trofeo.display();//muestra el final
+    escenario.display();//Muestra el escenario
+    escenario.recolectarGemas(player);
     //audioI.pause();
     //audioJ.play();
 
@@ -78,10 +81,6 @@ void draw() {
       if (!move) {
         player.detener();
       }
-    }
-
-    if (player.colision(trofeo)) {
-      estado = MaquinaEstados.ganando;
     }
 
     if (player.colisionConAreas(laberinto.getCollideLab())) {
@@ -114,7 +113,7 @@ void reiniciarJuego() {
   escenario = new Escenario();//Inicializacion de Escenario
   laberinto = new Laberinto();//Inicializacion del LABERINTO
   hud = new Hud();//Inicializacion del HUD
-  trofeo = new ObjetoMagico(new PVector(65, 470), 30, 30);//Inicializacion del ObjetoMagico alias Trofeo
+  //trofeo = new ObjetoMagico(new PVector(65, 470), 30, 30);//Inicializacion del ObjetoMagico alias Trofeo
   minim = new Minim (this);
   audioI = minim.loadFile("InterstellarSpace.wav");
   audioJ = minim.loadFile("Easter-Wonders.wav");
