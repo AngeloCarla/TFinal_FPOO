@@ -24,11 +24,11 @@ void setup() {
   minim = new Minim (this);
   audioI = minim.loadFile("InterstellarSpace.wav");
   audioJ = minim.loadFile("Easter-Wonders.wav");
-  
-  escenario.agregarGemas(new ObjetoMagico(new PVector(535,165), 30));
-  escenario.agregarGemas(new ObjetoMagico(new PVector(213,330), 30));
-  escenario.agregarGemas(new ObjetoMagico(new PVector(100,500), 30));
-  escenario.agregarGemas(new ObjetoMagico(new PVector(350,450), 30));
+
+  escenario.agregarGemas(new ObjetoMagico(new PVector(535, 165), 30));
+  escenario.agregarGemas(new ObjetoMagico(new PVector(213, 330), 30));
+  escenario.agregarGemas(new ObjetoMagico(new PVector(100, 500), 30));
+  escenario.agregarGemas(new ObjetoMagico(new PVector(350, 450), 30));
 }
 
 void draw() {
@@ -83,9 +83,6 @@ void draw() {
       }
     }
 
-    if (player.colisionConAreas(laberinto.getCollideLab())) {
-      estado = MaquinaEstados.perdiendo; // Cambiar estado a perdiendo cuando hay colisión
-    }
 
     break;
   case MaquinaEstados.ganando://Pantalla Ganadora
@@ -113,7 +110,12 @@ void reiniciarJuego() {
   escenario = new Escenario();//Inicializacion de Escenario
   laberinto = new Laberinto();//Inicializacion del LABERINTO
   hud = new Hud();//Inicializacion del HUD
-  //trofeo = new ObjetoMagico(new PVector(65, 470), 30, 30);//Inicializacion del ObjetoMagico alias Trofeo
+
+  escenario.agregarGemas(new ObjetoMagico(new PVector(535, 165), 30));
+  escenario.agregarGemas(new ObjetoMagico(new PVector(213, 330), 30));
+  escenario.agregarGemas(new ObjetoMagico(new PVector(100, 500), 30));
+  escenario.agregarGemas(new ObjetoMagico(new PVector(350, 450), 30));
+ 
   minim = new Minim (this);
   audioI = minim.loadFile("InterstellarSpace.wav");
   audioJ = minim.loadFile("Easter-Wonders.wav");
