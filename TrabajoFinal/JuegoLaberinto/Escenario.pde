@@ -27,19 +27,17 @@ class Escenario {
 
   //Metodo que dibuja el borde Superior del Laberinto
   void dibujarBordeS() {
-    //imageMode(CENTER);
-    noTint();//No colorea la imagen
     image(bordeS, width/2, height/2, 600, 600);
   }
 
   //Metodo que dibuja el borde Inferior del Laberinto
   void dibujarBordeI() {
-    //noTint();//Permite que no se coloree la imagen
-    //imageMode(CENTER);
     image(bordeI, width/2, height/2, 600, 600);
   }
-  
+  /**Dibuja el fondo del laberinto*/
   void dibujarFondo(){
+    noTint();
+    imageMode(CENTER);
     image(fondo, width/2, height/2, 600, 600);
   }
 

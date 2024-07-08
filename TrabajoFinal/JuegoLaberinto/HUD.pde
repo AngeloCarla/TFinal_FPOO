@@ -18,9 +18,9 @@ class Hud implements IVisualizable {
 
   // Método para mostrar el Tiempo en el juego
   void mostrarTiempo() {
-    textAlign(CENTER);
-    textSize(20);
-    fill(255);
+    textAlign(CENTER); //Centra el texto
+    textSize(20); //Tamaño del texto
+    fill(255); //Color del texto
 
     if (estado == MaquinaEstados.jugando) {
       tiempoTranscurrido = millis() - tiempoInicial; // Calcula el tiempo transcurrido desde el inicio del juego

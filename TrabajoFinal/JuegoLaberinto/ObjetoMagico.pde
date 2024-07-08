@@ -14,7 +14,6 @@ class ObjetoMagico implements IVisualizable, IPosicionable {
   /* --- METODOS --- */
   //Metodo para Visualizar el objetoMagico
   void display() {
-    imageMode(CENTER);
     image(gema, posicion.x, posicion.y, tamano, tamano);
   }
 

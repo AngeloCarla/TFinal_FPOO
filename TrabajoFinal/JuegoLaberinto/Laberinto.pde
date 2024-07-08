@@ -1,14 +1,14 @@
 class Laberinto implements IVisualizable {
   /* --- ATRIBUTOS --- */
-  private PImage laberinto;
-  private ArrayList<Collider> collideLab;
+  private PImage laberinto; //Imagen del laberinto
+  private ArrayList<Collider> collideLab; //Almacena las colisiones para los muros
 
   /* --- CONSTRUCTORES --- */
   public Laberinto() {
     laberinto = loadImage("laberinto.png");
     collideLab = new ArrayList<Collider>();
 
-    //HORIZONTAL
+    //Colisiones para los muros en HORIZONTAL
     collideLab.add(new Collider(70, 8, new PVector(105, 210)));//1.1
     collideLab.add(new Collider(60, 8, new PVector(278, 210)));//1.2
     collideLab.add(new Collider(110, 8, new PVector(400, 210)));//1.3
@@ -24,7 +24,7 @@ class Laberinto implements IVisualizable {
     collideLab.add(new Collider(45, 5, new PVector(175, 495)));//6.1
     collideLab.add(new Collider(220, 5, new PVector(276, 495)));//6.2
 
-    //VERTICAL
+    //Colisiones para los muros en VERTICAL
     collideLab.add(new Collider(8, 60, new PVector(165, 150)));//1.1
     collideLab.add(new Collider(8, 60, new PVector(279, 150)));//1.2
     collideLab.add(new Collider(8, 50, new PVector(224, 225)));//2.1

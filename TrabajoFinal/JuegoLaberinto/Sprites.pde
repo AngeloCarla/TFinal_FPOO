@@ -24,7 +24,6 @@ class Sprites {
   /* --- METODOS --- */
   //Metodo que se encarga de renderizar al personaje dependiendo del estado en el que se encuentra
   public void renderJugador(int state, PVector posicion) {
-    //imageMode(CENTER);
     //Implementacion del DeltaTime
     int framesPorSegundo = round(frameRate);
     float deltaTime = Time.getDeltaTime(framesPorSegundo);
