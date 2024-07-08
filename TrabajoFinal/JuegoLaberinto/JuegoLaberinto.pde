@@ -91,13 +91,15 @@ void draw() {
     break;
   case MaquinaEstados.ganando://Pantalla Ganadora
     image(fondo, width/2, height/2, 600, 600);//Imagen de Fondo de la Pantalla de Inicio
-    image(loadImage("ganaste.png"), width/2, 100, 400, 400);
+    image(loadImage("hud.png"), width/2, 205, 200, 100);
+    image(loadImage("ganaste.png"), width/2, 130, 500, 500);
     audioJ.pause();//Reproduce la musica de cuando se esta jugando
     hud.display();
     break;
   case MaquinaEstados.perdiendo://Pantalla Perdedora
     image(fondo, width/2, height/2, 600, 600);//Imagen de Fondo de la Pantalla de Inicio
-    image(loadImage("perdiste.png"), width/2, 100, 400, 400);
+    image(loadImage("hud.png"), width/2, 205, 200, 100);
+    image(loadImage("perdiste.png"), width/2, 130, 500, 500);
     hud.display();
     break;
   }
