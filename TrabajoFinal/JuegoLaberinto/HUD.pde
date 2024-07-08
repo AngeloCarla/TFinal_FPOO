@@ -36,7 +36,7 @@ class Hud implements IVisualizable {
 
     if (estado == MaquinaEstados.ganando || estado == MaquinaEstados.perdiendo) {
       int tiempo = tiempoTranscurrido / 1000; // Calcula los segundos transcurridos
-      text("Tiempo Final: " + tiempo, width/2, 190); // Muestra el tiempo final en pantalla
+      text("Tiempo Final: " + tiempo, width/2, 200); // Muestra el tiempo final en pantalla
     }
   }
 
